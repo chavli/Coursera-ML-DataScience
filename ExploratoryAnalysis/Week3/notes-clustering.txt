@@ -1,0 +1,44 @@
+-- -------------------------------------------------------------------------------------------------
+-- 1.General
+-- -------------------------------------------------------------------------------------------------
+    1. how do we define distance
+        euclidean, binary match, correlation
+
+    2. how do we do the grouping
+    3. how do we visualize the groups
+    4. how do we interpret the groups
+
+    unscaled data will mess up clustering results.
+
+-- -------------------------------------------------------------------------------------------------
+-- 2. Hierarchical Clustering
+-- -------------------------------------------------------------------------------------------------
+    agglomerative approach: keep merging the two closest points until no more merging can happen
+    each merge creates a new point which is the average of the points it clustered together.
+
+    methods for creating the new point:
+        average linkage: the "center of mass" of the points being clustered
+        complete linkage: distance between the farthest points of the clusters being merged
+
+    # columns are dimensions, rows are points. dist returns all the pairwise distances
+    d = dist(df)
+    clustering = hclust(d)
+    plot(clustering) # produces a dendogram
+
+
+    # heatmap
+    heatmap(dataMatrix) # rows represent the sample dendogram. cols don't mean much
+
+-- -------------------------------------------------------------------------------------------------
+-- 3. K-means Clustering
+-- -------------------------------------------------------------------------------------------------
+    clustering = kmeans(df, centers=)
+
+-- -------------------------------------------------------------------------------------------------
+-- 4. Dimension Reduction
+-- -------------------------------------------------------------------------------------------------
+
+
+-- -------------------------------------------------------------------------------------------------
+-- 5. R Colors
+-- -------------------------------------------------------------------------------------------------

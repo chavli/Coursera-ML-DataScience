@@ -1,0 +1,134 @@
+---
+title: 'Property Damage and Casualties of Various Weather Events in the U.S. (2000-2011)'
+author: "Cha Li"
+date: "04/25/2015"
+output: html_document
+---
+
+### Synopsis
+This analysis looks at which weather events have caused the most property damage and the most human casualties
+in recent time. The dataset used for this analysis is provided by the U.S. National Weather Service 
+and contains the characteristics of various major storms and weather events between 1950 and 2011. 
+This report focusses on recent storms, 2000 - 2011, and will show that tornadoes are the most harmful and
+that floods are the most damanging.
+
+### Data Processing
+#### Loading Packages and Raw Data
+```{r packageloading,message=F}
+library(reshape2)
+library(lubridate)
+library(dplyr)
+library(ggplot2)
+```
+
+```{r rawloading, cache=T}
+raw_data <- read.csv(bzfile("raw-data/repdata-data-StormData.csv.bz2"), stringsAsFactors=F)
+```
+
+#### Data Manipulation
+The storm dataset breaks damage into two categories: property and crops. Additionally, each category
+is given two columns to represent total damage inflicted: a base value (PROPDMG, CROPDMG) and an
+exponent code or value (PROPDMGEXP, CROPDMGEXP). Therefore, total damage caused by a storm is calculated
+with: (PROPDMG * 10 ^ PROPDMGEXP) + (CROPDMG * 10 ^ CROPDMGEXP). The problem arises in the representation
+of the exponent. In some instances numbers are used but others use codes such as 'H' for hundred, 
+'K' for thousand, 'M' for million, and 'B' for billion. As a result, most of the data cleaning is centered
+around converting those codes to their respective exponents. We also only focus on data from 2000 and
+onward as more recent data is not only more relevant but also more complete. 
+```{r manipulation}
+# only use data from 2000 onward
+working_data <- raw_data %>%
+    mutate(BGN_DATE=mdy_hms(BGN_DATE), casualties=FATALITIES+INJURIES) %>%
+    filter(BGN_DATE >= ymd("2000-01-01"))
+
+# economic damage = property damange + crop damage
+# total property and total crop damage are each divided into two columns:
+#   a base value, up to 3 significant digits. PROPDMG, CROPDMG
+#   a exponent value, H, K, M, B, or a numeric value. PROPDMGEXP, CROPDMGEXP
+# damage = base * 10 ^ exp
+
+# convert exponent codes (H = hundred, K = thousand, M = million, B = billion) into their proper
+# exponent values. all other character codes will be converted to 0
+working_data <- working_data %>%
+    mutate(CROPDMGEXP=ifelse(CROPDMGEXP == 'B' | CROPDMGEXP == "b", 9, CROPDMGEXP)) %>%
+    mutate(CROPDMGEXP=ifelse(CROPDMGEXP == 'M' | CROPDMGEXP == "m", 6, CROPDMGEXP)) %>%
+    mutate(CROPDMGEXP=ifelse(CROPDMGEXP == 'K' | CROPDMGEXP == "k", 3, CROPDMGEXP)) %>%
+    mutate(CROPDMGEXP=ifelse(CROPDMGEXP == 'H' | CROPDMGEXP == "h", 2, CROPDMGEXP)) %>%
+    mutate(CROPDMGEXP=ifelse(CROPDMGEXP %in% c("", "+", "?", "-"), 0, CROPDMGEXP)) %>%
+    mutate(PROPDMGEXP=ifelse(PROPDMGEXP == 'B' | PROPDMGEXP == "b", 9, PROPDMGEXP)) %>%
+    mutate(PROPDMGEXP=ifelse(PROPDMGEXP == 'M' | PROPDMGEXP == "m", 6, PROPDMGEXP)) %>%
+    mutate(PROPDMGEXP=ifelse(PROPDMGEXP == 'K' | PROPDMGEXP == "k", 3, PROPDMGEXP)) %>%
+    mutate(PROPDMGEXP=ifelse(PROPDMGEXP == 'H' | PROPDMGEXP == "h", 2, PROPDMGEXP)) %>%
+    mutate(PROPDMGEXP=ifelse(PROPDMGEXP %in% c("", "+", "?", "-"), 0, PROPDMGEXP)) %>%
+    mutate(PROPDMGEXP=as.numeric(PROPDMGEXP), CROPDMGEXP=as.numeric(CROPDMGEXP))
+
+# create some new columns for property and crop damage
+working_data <- working_data %>% mutate(
+    crop_damage = CROPDMG * 10 ** CROPDMGEXP,
+    prop_damage = PROPDMG * 10 ** PROPDMGEXP)
+
+# for this analysis we really only care about event type, casualties, and damage. lets cut out
+# uneeded columns to save memory
+working_data <- working_data %>% select(EVTYPE, FATALITIES:INJURIES, crop_damage:prop_damage)
+```
+
+### Results
+#### Most Dangerous Weather Events
+This section will focus on which weather events are the most dangerous to human lives as measured by
+casualties. Casualties include fatalities and injuries, which are seperated in the graph below.
+```{r question1, fig.width=10}
+# Across the United States, which types of events (as indicated in the EVTYPE variable) are most harmful with respect to population health?
+event_casualties <- working_data %>% 
+    group_by(EVTYPE) %>% 
+    summarise(
+        total_fatalities=sum(FATALITIES),
+        total_injuries=sum(INJURIES))
+
+# top 10 events for each casualty type
+top_casualties <- event_casualties %>% arrange(desc(total_fatalities + total_injuries)) %>% head(n=15)
+
+# these sort the data in a way so the bar plot organizes them from most to least casualties. the data
+# is then melted to be in 'long format' for creating stacked bar plots
+top_casualties <- transform(top_casualties, EVTYPE = reorder(EVTYPE, order(total_fatalities + total_injuries, decreasing = TRUE)))
+top_casualties <- melt(top_casualties, id.var="EVTYPE")
+
+ggplot(top_casualties, aes(x=EVTYPE, y=value, fill=variable)) +
+    geom_bar(stat="identity") +
+    xlab("Weather Event") +
+    ylab("Total Casualties") + 
+    ggtitle("Top 15 Dangerous Weather Events") +
+    scale_fill_discrete(name="Casualty Type", labels=c("Fatality", "Injury")) + 
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+The graph above shows the top 15 most dangerous weather events. We can see 
+that tornadoes have caused the most casualties since 2000, the vast majority of which were injuries.
+Tornadoes have more than 3 times as many casualties as the next event, excessive heat, but both have similar
+fatality counts. As a percent of total casualties, flood-based events have the highest fatality rate. 
+
+#### Most Dangerous Weather Events
+We now look at the most damaging weather events. Damage is measued in US Dollars and is split between
+property damage and crop damage. 
+```{r question2, fig.width=10}
+# Across the United States, which types of events have the greatest economic consequences?
+event_damage <- working_data %>% 
+    group_by(EVTYPE) %>% 
+    summarise(
+        total_property=sum(prop_damage),
+        total_crop=sum(crop_damage))
+
+top_damage <- event_damage %>% arrange(desc(total_property + total_crop)) %>% head(n=15)
+top_damage <- transform(top_damage, EVTYPE = reorder(EVTYPE, order(total_property + total_crop, decreasing = TRUE)))
+top_damage <- melt(top_damage, id.var="EVTYPE")
+
+ggplot(top_damage, aes(x=EVTYPE, y=value / 10**6, fill=variable)) +
+    geom_bar(stat="identity") +
+    xlab("Weather Event") +
+    ylab("Total Damage (millions of USD)") + 
+    ggtitle("Top 15 Damaging Weather Events") +
+    scale_fill_discrete(name="Damage Type", labels=c("Property", "Crop")) + 
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+The graph above illustrates the top 15 events which caused the most damage between 2000 and 2011. 
+Floods come out on top followed by typhoons and storm surges. In the majority of cases shown, property 
+damage is the main contributor to overall damage by a vast margin. The outlier in this case are droughts
+where the vast majority of damage came from crops. Tornadoes, which caused the most casualties, comes in
+fourth in overall damage inflicted.

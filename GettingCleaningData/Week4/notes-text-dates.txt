@@ -1,0 +1,27 @@
+-- -------------------------------------------------------------------------------------------------
+1. General String functions
+-- -------------------------------------------------------------------------------------------------
+toupper()
+tolower()
+strsplit(data, split="")
+sub() , gsub(before, after, data) -- string substitution, latter places all instances within a string
+grep(), grepl() -- string searc by pattern
+nchar()
+substr(data, start, end)
+paste() -- concatenate
+
+
+general rules:
+descriptive text
+all lower case (normalized)
+treat as factors
+
+-- -------------------------------------------------------------------------------------------------
+2. Regular Expressions
+-- -------------------------------------------------------------------------------------------------
+? - optional
+* - 0 or more
++ - 1 or more
+{m, n} - m to n matches
+{m} - exactly m matches
+{m, } - at least m matches

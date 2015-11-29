@@ -1,0 +1,80 @@
+RShiny App Basics
+
+components, both need library(shiny)
+    ui.R
+    server.R
+
+from R, change into the directory containing these files and execute runApp().
+
+general UI structure
+shinyUI(
+    ...
+)
+
+general server structure
+shinySever(
+    function(input, output){
+        output$custom_field <- ...
+    }
+)
+
+
+submitButton(...) halts auto-refresh of shinyapp. the first instance (onLoad) will always
+execute. goButton prevents this
+
+other than using ui.R, you can use plain HTML/CSS/JS, with proper labels, with RShiny server.
+
+runApp(display.mode="showcase") # this shows the code executing as people interact
+
+===========================================================================================
+Advanced Shiny Apps
+
+# code before the shinyServer call is called once on runApp()
+shinySever(
+    function(input, output){
+        # code in here is executed once per page load/refresh
+
+        # the exception is code inside 'reactive' calls, typically render*() functions.
+        # code in reactive functions are executed on every new input/event
+    }
+)
+
+server.R does not necessarily run code serially. R will only run the code that it needs to.
+
+reactive({...}) is a function that is executed reactively but independent of render* functions
+
+you treat the result of a reactive function as a function. reactive() returns a function?
+a pre-computed function?
+
+x <- reactive({...})
+output$text1 <- renderText({x()})
+
+
+trigger-based reactivity:
+    example: execute only on onSubmit rather than onInput
+
+===========================================================================================
+More On Layouts
+shinyUI(fluidpage(
+    # fluidpage allows you to define a UI based on columns and rows:
+    #   fluidRow(), column()
+))
+
+other shiny UI element functions: Tabsets(), navlists(), navbars()
+
+you can also define a HTML page instead of using ui.R by defining www/index.html
+servver.R will look for input names based on the "name" attribute in tags:
+    <input name="testname" type=... value=... min=... max=...></input>
+additional attributes follow the same names as arguments
+
+<- assigns a variable in the environment where the expression is evaluated
+<<- searches parent environments for a variable of the same name. if a match is found
+    (and binding is not locked) then the variable's value is redefined. otherwise the
+    variable is assigned the value in the global environment
+    the variable's value is redefined
+
+
+===========================================================================================
+Deploying to RShiny Server
+library(shinyapps)
+deployApp(".", appName = "ci-simulator")

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Confidence Interval Simulator</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Confidence Interval Simulator">
+  <meta name="author" content="Cha Li">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="libraries/widgets/interactive/css/aceeditor.css"></link>
+<link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Confidence Interval Simulator</h1>
+    <h2>Data Products, Coursera 2015</h2>
+    <p>Cha Li<br/>Data Scientist</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Confidence Intervals</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Confidence intervals (CI) allow us to state how certain we are about our estimates. A common case is 
+estimating the sample mean when we want to know the average and also how sure we are about that 
+average. </p>
+
+<p>Assuming the data follows a normal distribution then we have the following definition of the CI:
+$$X \sim N(\mu, \sigma^{2} )$$
+$$\bar{X}\pm z \times \frac{\sigma}{\sqrt{n}}$$</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>The Problem</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Several variables have an influence on the range of the confidence interval and in most cases it&#39;s
+difficult for people to decide which variables to change. Do you need more data? A different confidence
+level? </p>
+
+<p>This issue is why I created a <a href="https://chavli.shinyapps.io/ci-simulator">shiny app</a> which calulates 
+and plots the intervals given a set of user inputs for the mean, standard deviation,
+confidence level, and sample size.</p>
+
+<p>The next two slides will briefly go over the R code the above app uses and an example output plot.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>R Confidence Intervals</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Typically, to calculate a confidence interval in R you would do something like the following:</p>
+
+<pre><code class="r">set.seed(12345)                         # control randomness
+z &lt;- 1.96                               # 95% confidence level 
+N &lt;- 100
+data &lt;- rnorm(n = N, mean = 10, sd=6)  # true mean and sd are 10 and 6, respectively
+X_bar &lt;- mean(data)
+X_sd &lt;- sd(data)
+X_ci &lt;- X_bar + c(-1, 1) * z * (X_sd / sqrt(length(data)))
+</code></pre>
+
+<p>This gives us the following result:</p>
+
+<p>$n = $ 100, $\bar{X} = $ 11.4711832, $\sigma_{X} = $ 6.688385</p>
+
+<p>95% Confidence Interval: [10.16, 12.78]</p>
+
+<p>In this instance, the true mean is just barely outside the calculated CI.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Visualizing</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p>The plot to the right shows the calculated confidence interval laid over a histogram the sample data.</p>
+
+<ul>
+<li><span style="color:purple">Purple Line</span>: the true distribution mean, 10</li>
+<li><span style="color:red">Red Line</span>: the sample mean</li>
+<li><span style="color:#b8860b">Yellow Lines</span>: the lower and upper bounds of the 95% CI of the sample mean</li>
+<li><span style="color:#1e90ff">Blue Bars</span>: the distribution of random data</li>
+</ul>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p><img src="assets/fig/unnamed-chunk-3-1.png" alt="plot of chunk unnamed-chunk-3"> </p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Confidence Intervals'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='The Problem'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='R Confidence Intervals'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Visualizing'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  <script src="libraries/widgets/interactive/js/ace/js/ace.js"></script>
+<script src="libraries/widgets/interactive/js/opencpu-0.5.js"></script>
+<script src="libraries/widgets/interactive/js/interactive.js"></script>
+
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<script src="shared/shiny.js" type="text/javascript"></script>
+  <script src="shared/slider/js/jquery.slider.min.js"></script>
+  <script src="shared/bootstrap/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="shared/slider/css/jquery.slider.min.css"></link>
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>

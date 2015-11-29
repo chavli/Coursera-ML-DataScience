@@ -1,0 +1,9 @@
+base
+DBI
+RPostgreSQL
+slidify
+knitr
+shiny
+slidifyLibraries
+ggplot2
+XML

@@ -1,0 +1,6 @@
+name: ci-simulator
+account: chavli
+server: shinyapps.io
+bundleId: 290536
+url: https://chavli.shinyapps.io/ci-simulator
+when: 1445153642.58783

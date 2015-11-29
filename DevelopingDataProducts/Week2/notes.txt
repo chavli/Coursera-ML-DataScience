@@ -1,0 +1,56 @@
+==================================================================
+gh-pages
+
+webpage hosting using githib. you need a branch called 'gh-pages'
+and from there you add your html (<anything>.html).
+
+<username>.github.io/<reponame>/path/to/file.html
+
+
+.nojekyll ?
+
+==================================================================
+Slidify
+
+A tool for creating presentations powered by R code. It combines knitr,
+markdown, js, and HTML5.
+
+Allows executable code chunks. Presentation output is HTML
+install.packages("devtools")
+install_github("slidify", "ramnathv")
+install_github("slidifyLibraries", "ramnathv")
+library("slidify")
+
+# starting
+library(slidify)
+library(knitr)
+author(<slide name>)
+slidify("/path/to/index.Rmd")
+browseURL("/path/to/index.html")
+
+# publishing slidify slides to github:
+publish_github(username, reponame)
+
+the Rmd file can also take raw html file
+
+you can also add interactive elements to slidify:
+quiz questions, Rchart plots, shiny apps
+
+Quiz Question Format:
+## Question 1
+What is 1 + 1?
+
+1. 1
+2. _2_
+3. 3
+4. 4
+
+***.hint This is a hint
+***.explanation This is an explanation
+
+
+==================================================================
+RStudio Presenter
+
+Presentation tool within the RStudio development environment
+

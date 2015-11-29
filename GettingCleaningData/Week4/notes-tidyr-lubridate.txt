@@ -1,0 +1,56 @@
+-- -------------------------------------------------------------------------------------------------
+-- 1. dplyr -- Introduction
+-- -------------------------------------------------------------------------------------------------
+seperate(df) - seperate a column containing n variables into n columns
+
+
+gather(...) - turn columns headers into the values of a single column (key) (similar to group by)
+spread(...) - turn the values of a single column into column headers (key) and fill with values
+extract_numeric("...") - extract numeric characters from a string
+
+
+-- -------------------------------------------------------------------------------------------------
+-- 2. lubridate -- Introduction
+-- -------------------------------------------------------------------------------------------------
+day = today() # date object
+year(today)
+month(today)
+wday(this_day, label=T) # returns Sat, Mon, etc
+
+n = now(tzone="...") # datetime object
+hour(n)
+minute(na)
+
+# handling date strings
+ymd(), dmy(), hms(), ymd_hms(), etc
+
+e.g.
+
+ymd("2015-02-28")
+ymd("1989 May 17")
+dmy(25081985)
+
+R can figure out the rest as long as the function specifies the order of time elements
+
+pretty much any combo of "m" "d" "y" will work for dates  "h" hour, "m" minute, "s" seconds
+
+ymd_hms(...) # standard timestamps
+
+# update the fields within a time object
+update(date, ...)
+update(this_moment, hours=8, minutes=34, seconds=55)
+
+# e.g. date arithmetic
+date_obj + days(3)
+date_obj + hours(15) + minutes(50)
+
+# converting between timezones
+with_tz(date_obj, tzone = "")
+with_tz(date_obj, tzone="Asia/Hong_Kong")
+
+# creating dates with timezones
+mdy("June 17, 2008", tz="Singapore")
+
+# time intervals, handles tz differences
+how_long <- new_interval(last_time, arrive)
+as.period(how_long)

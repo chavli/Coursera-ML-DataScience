@@ -1,0 +1,59 @@
+===== R Markdown
+R Code + Markdown language = knitr
+
+slidify package: R Markdown -> Slides
+
+
+===== Knitr
+
+Reprodicible Work:
+    1. keep track of everything (version control)
+    2. don't save output or the results of operations. provide raw data and the code to transform it
+    3. use non-proprietary formats
+
+good for summarizing live data (if can be done quickly)
+
+Rmd code chunk
+
+```{r}
+<code>
+```
+
+
+```{r graphcode}  # name code section'
+<code>
+```
+
+```{r modelcode,echo=F} # hiding the code
+```
+
+```{r modelcode,echo=F,results="hide"} # hiding the code and code output
+```
+
+# embedding code within text
+```{r echo=F}
+time = ...
+rand = ...
+```
+The current time is `r time`.
+My favorite number is `r rand`.
+
+
+# Rmd embeds the binary image data into the generated html. thus the entire document is
+# self contained
+```{r modelcode,fig.height=4} # control the height of embedded graphs
+```
+
+Other options
+
+Output --
+results: asis, hide
+echo: True, False
+
+Figures --
+fig.height
+fig.width
+
+Caching ---
+caches the results of a computation to disk. this is very good for long computations with rarely changing results
+cache: True, False

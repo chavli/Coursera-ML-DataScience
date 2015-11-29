@@ -1,0 +1,94 @@
+***** Week 1 *****
+
+----- Principles of Analytic Graphics:
+
+1. Make Comparisons
+
+2. Show causality, mechanism, explanation (or your belief of it)
+    - create a hypothesis, causal framework
+
+3. Show multivariate data
+    effectively show multiple variables in a single plot
+
+    Simpson's Paradox, break up data by multiple variables to see true behavior
+
+4. Integration of Evidence
+    don't let the tool dictate the visuals used
+    combine words, numbers, images, diagrams into a single presentation
+
+5. Describe and Document the evidence
+
+6. Content
+    - tell a story with the data, if there is no story then the data is much less useful.
+
+
+----- Exploratory Graphs
+understand data, find patterns, suggest modeling strategies, "debug" analysis
+
+x = rnorm(1000)
+hist(x)
+rug(x) # plots all the data points along the bottom of the graph
+
+with() syntax:
+
+with(anything that results in a dataset, function(){
+    })
+
+-- or --
+
+with(dataset, {
+    # code goes here
+})
+
+with(subset(dataset, conditions), function(){
+    # reference columns directly by name
+})
+
+
+----- Plotting Systems
+1. Base Plotting System
+        build plots piece by piece. (e.g. text, mtext, lines, points, abline, etc). can't undo actions, or share easily
+
+2. Lattice System (lattice)
+    all plots created with a single function call (xyplot, bwplot). all parameters are defined in the call. good for visializing
+    conditional relationships. can be used to put multiple plots on a single page.
+
+    xyplot(Y ~ X | Z, data= , layout=c(N, M)) # y as a function of x given z
+
+3. ggplot2 System (ggplot2) -- learn this
+    "grammar of graphics"
+
+
+----- Base Plotting System
+par() allows you to control the numerous parameters that define the look of the graph
+
+par("name"), gives the current value of the specified parameter
+
+"oma" = outer margin
+
+example(points)
+
+points 21-25 take an outline color (col) and fill color (bg)
+
+
+----- Graphics Devices
+pdf(file=...)
+# create plot
+dev.off()
+
+> pdf(file="test.pdf")
+> with(iris, {plot(Sepal.Length, Sepal.Width)})
+> dev.off()
+
+Vector Formats:
+    pdf -- good for line type graphics, but not natural images. not efficient with large datasets
+    svg -- supports interactivity, scalar graphics, supported by most web-browsers
+
+Bitmap Formats:
+    png -- good for line images or images with solid colors
+    jpeg -- good for natural images. good for datasets with many data points or gradients. not good for line drawings
+
+
+save a currently made graph
+dev.copy(format, file=...) # may not copy exactly as it appears (spacing may be off)
+dev.off()

@@ -1,0 +1,54 @@
+My First Presentation
+========================================================
+author: Cha Li
+date: `r date()`
+transition: rotate
+
+First Slide
+========================================================
+
+Slide separation needs at least 3 equals signs
+
+From within RStudio: ? > Markdown Quick Reference
+
+For more details on authoring R presentations click the
+**Help** button on the toolbar.
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+Slide With Code
+========================================================
+type: section
+
+```{r, echo=FALSE}
+summary(cars)
+```
+
+Slide With Plot
+========================================================
+type: subsection
+transition: linear
+
+```{r, echo=FALSE}
+plot(cars)
+```
+
+Tables
+===
+Column 1 | Column 2 | Column 3
+---------|----------|---------
+Value 1  | Value 2  | Value 3
+
+A Slide With Two Columns
+===
+Hello World
+
+1. Test
+2. Bullets
+
+***
+Goodbye World
+* Unordered Bullets
+    + Sub bullet

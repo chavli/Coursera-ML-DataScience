@@ -1,0 +1,78 @@
+== =================================================================================================
+== Reading from external sources
+== =================================================================================================
+
+----------
+1. MySQL
+----------
+install.packages("RMySQL")
+install.packages("sqldf") # sql-like queries for R dataframes
+
+dbListFields(conn, tablename) # list columns of table
+
+# returning part of the result of a large query (memory efficient)
+iter = dbSendQuery(dbconn, query)
+results = fetch(iter, n=10)
+dbClearResult(iter) # remove query
+
+
+----------
+2. HDF5 (hierarchical data format)
+----------
+can be used to optimize read/writes from disk
+
+source("http://bioconductor.org/biocLite.R")
+biocLite("rhdf5")
+library(rhdf5)
+h5createFile(filename)
+
+fin = h5createFile(filename) # example.hd5
+h5CreateGroup(filename, groupname)
+h5CreateGroup(filename, grouppath)
+h5write(data, filename, grouppath)
+h5read(filename, grouppath)
+
+
+----------
+3. Websites, and scraping data
+----------
+conn = url(http://url)
+html = readLines(conn, n=)
+
+library(XML)
+html = htmlTreeParse(url, useInternalNodes=T) # return structured data
+
+library(httr)
+html = GET(url)
+parsedHtml = htmlParse(html, asText=T)
+
+# authentication
+html = GET(url, authenticate(user, password))
+
+# handles let you keep connections open
+conn = handle(url)
+data = GET(handle=conn, path=)
+
+----------
+3. API's (application programming interface)
+----------
+library(httr)
+# oauth stuff
+# response = hit api
+json = content(response) # returns a R object representing json
+json = jsonLite::fromJSON(toJSON(json)) # json to R dataframe
+
+----------
+4. Other
+----------
+library(foreign) # allows loading data from other programs (Matlab, S, SPSS, Strata)
+library(RMongoDB)
+
+# image files
+jpeg, readbitmap, png, EBImage
+
+# GIS data (geographic info systems)
+rdgal, rgeos, raster
+
+# music files (mp3)
+seawave, tuneR

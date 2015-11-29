@@ -1,0 +1,113 @@
+===== R Packages
+basic directory structure
+/<package_name>
+    R/              # contains R code
+    man/            # contains documentation
+DESCRIPTION         # special markup file containing package information
+NAMESPACE           # define which functions are part of the public API, required functions
+                    # from other packages, and other dependencies
+
+
+package.skeleton() will generate the above directory structure and include files for all functions
+in the current workspace. don't do this if there are random functions in the environment but
+this is useful if all the functions you're using will go into the package.
+
+
+DESCRIPTION file contains various key:value lines containing things like the title, description, author, etc
+
+NAMESPACE file contains the following commands
+export("function name")                         # make a package function public
+import("package name")                          # import a required package
+importFrom("package name", "function name")     # import a specific function from a package
+
+doc files in man/ follow a specific markup language. these generate the documents when the ?<functioname> command
+is called from R
+
+
+Building and Verifying
+R CMD build /path/to/package -- build a package (while in its directory)
+R CMD check /path/to/package -- run tests against the package to ensure it is configured and runs properly
+
+
+roxygen2 package extracts documentation for code files given that comments follow a certain format.
+build > configure build and check > checkmark roxygen
+
+#' Brief Description of Function
+#'
+#' Long description of function
+#'
+#' @param
+#' ...
+#' @return
+#' @author
+#' @details detailed description of function. mathematical desc, algorithms, references, etc
+#' @seealso reference any other functions
+#' @export make this function public
+#' @importFrom <package> <function>
+
+
+===== R Classes and Methods
+Two systems of classes: S3 classes (historical) and S4 classes (newer, more formal, recommended method)
+
+S4 classes require the 'methods' package
+defining a class: setClass(...)
+?Classes
+?Methods
+?setClass
+?setMethod
+?setGeneric
+
+
+generic functions are entities which take any data type and determine the specific method to be called based
+on the given data type
+
+example generic function: mean(...)
+
+function (x, ...)
+UseMethod("mean")
+<bytecode: 0x53b0a98>
+<environment: namespace:base>
+
+> methods("mean")
+[1] mean.Date     mean.default  mean.difftime mean.POSIXct  mean.POSIXlt
+
+you can add new methods to generic functions by dot appending to the generic:
+mean.X
+
+the generic function will first look for a specific method for the data type, then look
+for a default method. if neither exist an exception is thrown.
+
+getS3method(generic, class)     # this is how you view the code of a method, unlike just printing a function
+getMethod(generic, signature)   # same as above but for S4 classes
+
+
+--- Example
+setClass("polygon",     # class name
+    represenation=(     # 'slots', R equivalent of class variables
+        x="numeric",
+        y="numeric"
+    ))
+
+setMethod("plot", "polygon",    # define the generic function (required?) and method name
+    function(x, y, ...){
+        ...
+    })
+
+use the '@' symbol to access the slots of an object
+    obj@var
+
+# instantiation
+p <- new("polygon", ...)
+plot(p)                     # calls the specific plot function defined by the polygon class
+
+
+
+
+===== yhat
+
+
+dave@lumobodytech.com
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJsdW1vYm9keXRlY2guY29tIiwic3ViIjoiZGF2ZUBsdW1vYm9keXRlY2guY29tIiwiYXVkIjoiTHVtbyIsImlhdCI6MTQ0NjY5MDQ5NH0.-zED2xdLK0_a0xy9CNpi1tpbyMH9e2GDBZ7TfEc7qkE",
+  "uuid": "b81322b7-1140-4c0d-a393-bf8a18eed547"
+}

@@ -1,0 +1,93 @@
+=== ================================================================================================
+Lattice and ggplot2
+=== ================================================================================================
+
+----------
+1. Lattice Graphics
+----------
+Useful for high-dimensional datasets and conditional datasets
+
+library(lattice)
+
+xyplot: scatterplot
+bwplot: boxplots
+histograms
+stripplot: boxplot with actual points
+dotplot: dots on violin strings
+splom: scatterplot matrix
+levelplot, contourplot: image data / matrices
+
+all functions take a formula: func(formula, data)
+example: y ~ x | a * b
+
+~ "function of"
+| "given"
+* interaction
+
+unlike the base plotting system which writes plots to a graphics device, lattice returns a
+trellis object which needs to be printed
+
+----------
+2. Lattice Panel Functions:
+----------
+control what happens in each panel (represents values of the conditional variable) of a lattice plot
+xyplot(formula, data, function(x, y){
+    # code, panel.<function>
+
+})
+
+
+
+----------
+3. ggplot2 (qplot)
+----------
+plots are made up of aesthetics (aes) (size , shape, color) and geoms (points, lines)
+library(ggplot2)
+
+qplot(...) # quick plot
+
+parameters:
+data, color (fill for histogram), geom = c("point", "smooth", "density"), facets
+method (defines the method of smoothing), shape
+
+default scatterplot for 2dim, default histogram for 1dim
+
+ggplot facets: similar to lattice panels
+qplot(..., facets = y ~ x)
+
+
+----------
+4. Using ggplot2
+----------
+# defines the data and other design features, but the actual plot is undefined (nothing to plot)
+g = ggplot(data, aes(x=, y=))
+
+# define how the data is displayed, in this case points
+g + geom_point()
+
+# and we can continue adding "layers"
+g + geom_point() + geom_smooth(method=...) # loess, lm
+
+# adding facets. "." means everything as a function of factor. if it's a specific variable then
+# the result graphs is a nxm grid showing all interactions
+... + facet_grid(. ~ factor_variable)
+
+# adding labels and things
+... + xlab()
+... + ylab()
+... + labs(x=, y=expression(...)) # expression lets us create mathematical text
+... + ggtitle()
+
+# themes
++ theme_gray(base_family=..., base_size=...) # default, this is where you define font options
++ theme_bw()
+
+# if parameters for elements are not constants, they need to be defined by aes
+e.g.
+geom_point(color="blue", size=3, alpha=.5)        # constant color
+geom_point(aes(color=factor), size=3, alpha=.5)   # color as a function of data, use aes()
+
+... + ylim(min, max)                    # this subsets the data to ignore data outside the defined range
+... + coord_cartesian(ylim=c(min, max)) # defines the ylim of the graph without subsetting the data
+
+

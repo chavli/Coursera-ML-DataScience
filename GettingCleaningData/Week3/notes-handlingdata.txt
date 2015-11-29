@@ -1,0 +1,132 @@
+-- -------------------------------------------------------------------------------------------------
+-- 1. Subsetting and Sorting
+-- -------------------------------------------------------------------------------------------------
+
+# this lets us subset on columns and rows with NAs
+df[which(condition), ]
+
+# order a dataframe by the specified columns
+df[order(column1, column2, ...), ]
+
+
+# the plyr package
+library(plyr) # syntactic sugar for manipulating data frames
+arrange(df, col1, col2, ...) # ascending
+arrange(df, desc(col1),  ...) # desceding
+
+
+-- -------------------------------------------------------------------------------------------------
+-- 2. Summarizing Data
+-- -------------------------------------------------------------------------------------------------
+summary(), quantile()
+
+# doesn't count NAs, set use.NA="ifany" to have it count them
+table()
+
+any(), all()
+
+# Y: values to show in tables, X,Z  variables along the margins
+xtab(Y ~ X + Z)
+
+xtab(freq ~ gender + age) # frequency by gender and age
+
+-- -------------------------------------------------------------------------------------------------
+-- 3. Creating new variables
+-- -------------------------------------------------------------------------------------------------
+# good for creating binary variables based on another variable
+ifelse(condition, T_value, F_value)
+
+# good for creating categorical variables from continuous variables
+cut(x, breaks=)
+
+# g defines the number of evenly distributed quantiles to bucket the data into
+library(HMisc)
+cut2(x, g=)
+
+# creating factor variables from other variables
+factor(x, levels=) # levels lets you define the order of the factors
+
+-- -------------------------------------------------------------------------------------------------
+-- 4. Reshaping Data
+-- -------------------------------------------------------------------------------------------------
+# pivot column values to be row values. ids remain unpivoted
+library(reshape2)
+melt(df, id=c(), measure.vars=c())
+
+  id x y
+1  a 2 2  ->
+2  b 2 2
+
+  id variable value
+1  a        x     2
+2  b        x     2
+3  a        y     2
+4  b        y     2
+
+
+# like a sql "group by". each value of x is given it's own row where columns values represent the
+# result of func() being executed on all the col values with the given row
+dcast(df, x  ~ y + z, func=)
+
+# apply a function over factors
+tapply(df, idx=, func=)
+
+# similarly: split, apply, combine
+spl = split(x, factor)
+res = lapply(spl, func=())
+unlist(res)
+
+-- -------------------------------------------------------------------------------------------------
+-- 4. dplyr -- Introduction
+-- -------------------------------------------------------------------------------------------------
+package devoted to managing data.frames, also works with data.tables and relational databases
+library(dplyr)
+arrange(df, column) - reorder the rows of a dataframe
+filter(df, condition) - extract a subset of rows based on logical conditions
+select(df, column names) - return a subset of the columns of a dataframe
+mutate(df, newname=func()) - add new columns or transform existing ones
+    new columns can be chained off the values of previously defined columns within the same call
+rename(df, newname2=oldname2, ...) - rename columns
+group_by(df, factor)
+    returns a new data frame that is split by the given factors. future ops against this dataset
+    will apply to all the split groups
+summarize(df, newvar=func())
+    summarize(df,
+              count = n() ,
+              unique = n_distinct(ip_id),
+              countries = n_distinct(country),
+              avg_bytes = mean(size) )
+
+bind_rows
+bind_cols
+
+
+View(df) - essentially a pretty print for data frames
+
+
+
+column names can be defined by name and be used to define ranges:
+A:D # all columns betwee nA and D
+
+columns can also be negated:
+-A
+
+# this is the pipeline op. feed the output of a dplyr function as the input to another dplyr function
+%>%
+
+df %>% filter(df, ...) %in% rename(df, x=zz) %>%...
+
+
+-- -------------------------------------------------------------------------------------------------
+-- 5. merging data
+-- -------------------------------------------------------------------------------------------------
+merge(df_x, df_y, by.x=, by.y=, ...)
+
+# plyr method:
+join(df_x, df_y)
+
+# another way
+df_list = list(df1, df2, df3)
+join_all(df_list)
+
+the last two methods require all data frames to have a common variable name to join on.

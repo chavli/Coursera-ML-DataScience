@@ -1,0 +1,8 @@
+organizing a data analysis
+
+1. data files: raw data, transformed/processed data
+2. figures: graphs, images, exploratory, final
+3. code: python, R (exploratory + final)
+4. text: readmes, reports
+
+knitr
