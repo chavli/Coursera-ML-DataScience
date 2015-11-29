@@ -1,0 +1,45 @@
+===== Predicting with Trees
+
+Simple model to detect non-linearities in data. The state space is split 
+multiple times until each cell contains a homogenous set of data.
+
+Random Forests (multiple trees) is a popular approach
+
+Pros: Easy to implement, easy to interpret, and non-linear
+
+Cons: Prone to overfitting if not prunned. Harder to estimate uncertainty
+
+Variables are chosen that best split the given group into two homogenous 
+groups (entropy / impurity).
+
+Gini Index (measure of imbalance)
+Misclassification
+Cross-Entropy
+
+Example: Iris Dataset
+  data(iris)
+
+  library(tree)
+  tree_fit = tree(Species ~ Sepal.Width + Petal.Width, data=iris)
+  summary(tree_fit)
+  plot(tree_fit)
+  text(tree_fit)
+
+  # plot the tree over the data
+  plot(iris$Petal.Width, iris$Sepal.Width, pch=19, col=as.numeric(iris$Species))
+  partition.tree(tree_fit, label="Species", add=TRUE)
+  legend(1.75, 4.5, legend=unique(iris$Species), col=as.numeric(unique(iris$Species)), pch=19)
+
+  predict(tree_fit, new_data)
+
+
+Pruning Example: Cars Dataset, Predicting Drive Train
+  library(MASS)
+  data(Cars93)
+
+  cross-validating a tree
+  plot(cv.tree(tree_fit, FUN=prune.tree, method="misclass")
+
+  # best defines the number of leaf nodes
+  pruned_tree = prune.tree(tree_fit, best=4)
+

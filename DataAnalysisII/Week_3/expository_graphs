@@ -1,0 +1,26 @@
+Expository Graphs
+  - graphs used to communicate results to other people
+
+Characteristics:
+  - communicate information
+  - information density is good
+  - color, size, and other aesthetics used to present info
+  - proper labels
+
+-- multiple panels per plot
+par(mfrow=c(1, 2))  1 row, 2 cols
+
+
+-- saving figures
+?Devices
+
+pdf(file="...", height, width)  dimensions in inches
+...
+..   graph commands
+..
+dev.off()
+
+
+png(file="", height, width) dimensions in pixels
+
+dev.copy2pdf(filename); -- directly copy the graph on screen to a file

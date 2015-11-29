@@ -1,0 +1,37 @@
+===== Confidence Intervals for Proportions
+the same methodology is used for proportions as is used by means
+
+point-estimate +/- margin of error: p_hat +/- z * SE
+
+SE = sqrt((p*(1-p)) / n), we don't know p most of the time so we use p_hat instead:
+
+  SE = sqrt( (p_hat * (1 - p_hat)) / n )
+
+
+when calculating the needed sample size to achieve a certain ME and there is no good prior
+guess for the value of p, or p_hat, the best choice is p_hat = .5. This is the naive prior
+and happens to provide the most conservative estimate for sample size.
+
+
+===== Hypothesis Test for Proportions
+the same methodoly is used for proportion hypothesis tests as well
+
+In all calculations used to build the hypothesis test, the null value of p is used 
+in place of the point-estimate. remember, in a hyp test the null hypothesis is assumed
+to be true. ex. observed successes becomes expected successes
+
+Z = (p_hat - p) / SE, SE = sqrt((p * (1 - p)) / n)
+
+when to use p_hat vs p:
+
+                                   conf inf            hyp test
+1. success-failure condition         p_hat                 p
+
+2. standard error                    p-hat                 p
+
+
+
+
+summary:
+success failure condition: n * p >= 10, n * (1 - p) >= 10
+standard error:  sqrt( (p * (1 - p)) / n)

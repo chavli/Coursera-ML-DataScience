@@ -1,0 +1,26 @@
+===== disjoint vs independence 
+
+disjoint events: events that cannot happen at the same time
+  P(A and B) = 0
+
+indpendent events: events where knowing about one does not tell us anything about the other
+  P(A | B) = P(A)
+
+
+===== condtional probability
+marginal probability 
+
+joint probability: P(A and B)
+
+conditional probability P(A | B)
+
+Bayes Theorem: P(A | B) = P(A and B) / P(B)
+
+  independent events: P(A and B) = P(A) * P(B)
+  dependent events (and general rule): P(A and B) = P(A | B) * P(B)
+
+
+
+
+===== Probability Trees
+  just a way to organize probabilities other than a table.

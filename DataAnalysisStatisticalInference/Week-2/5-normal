@@ -1,0 +1,38 @@
+===== the normal distribution
+  heights / weights are normally distributed
+  SAT scores
+
+  68% falls withing mu +/- 1sd
+  95% falls within mu +/- 2sd
+  99.7% falls within mu +/- 3sd
+
+  Z-score: number of sd's a value is from the mean (standardized score)
+
+  Z = (observation - mean)  / sd
+
+  |Z| > 2 are considered unusual
+
+  If you know the mean, sd, and percentile (instead of observation), you can 
+  still solve for the Z score. 
+
+
+  ===== evaluating a normal distribution
+histogram: pretty obvious
+scatterplot: y-axis are the values, x-axis are the theoretical quantiles of
+  the normal distribution. if there is a 1 to 1 relationship (linear) then
+  the data is normally distributed.
+
+  if the data is right skewed (side with the tail) the scatterplot will tend
+  up and to the left of the 1-1 line
+
+  if left skewed the line plateus to the right of the line
+
+  skinner (short tails) than normal distributions will have a S shape scatterplot along the
+  1-1 line. fatter (long tails) will have points that start under the line, then 
+  lie on the line, and end above the line
+
+
+===== working with the normal
+baggage weights: 45 pounds, sd = 3.2 pounds
+pnorm - find the percentile of a given value a
+qnorm - find the value of a given percentile

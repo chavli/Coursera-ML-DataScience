@@ -1,0 +1,89 @@
+===== Comparing Multiple Means
+Performance inference on the means of multiple groups
+
+---- Analysis of Variance (ANOVA)
+Compare means from more than two groups: are they so far apart that the observed
+differences cannot all reasonalby be attributed to sampling variability.
+
+
+H_0: all means are the same (nothing interesting going on)
+mu_1 = mu_2 = m_3 = ... = mu_k
+
+H_1: at least one pair of means is different from each other. 
+This does not tell us which are different, just there is a group
+
+---- F-Statistic (score)
+F = (var between groups) / (var within groups)
+
+The F-distributions is a heavily right skewed distribution and the F-score marks
+the start of the right tail. The F-score is area of the right tail. A large F-statistics
+leads to a small p-value. A large F statistic means there is little variance within the
+groups, or var between groups >> var within groups.
+
+var between groups = variance of all means
+var within groups = sum of variance of datapoints in each group
+
+
+===== ANOVA Tests
+variability paritioning: explaining the total variability of the response variable
+ to the variability of the explanatory variables.
+
+Example: vocab score given social class
+
+Total variability: variability of vocab scores (response variable)
+Partitions:
+  variability attributed to social class (between groups)
+  variability attributed to other factors (within group) all variable left over after
+    breaking the data intro the above groups. 
+
+ANOVA output:
+  sum of squares total (SST): total variability of response variable
+  sum of squares group (SSG): measures variability BETWEEN GROUPS
+    (amount of variance attributed to the explantory variable)
+    SSG = sum_i^k( n_i * (y_i - y)^2 )
+      y_i = mean of group i
+      y = overall mean
+      n_i = sample size of group i
+  sum of squares residuals (error) (SSE): variability attributed to variables not of interest
+    (WITHIN GROUP, variance unexplained by explanatory variable)
+    SSE = SST - SSG. if SSE >> SSG, then the chosen explanatory variable is not a good choice.
+    find another variable that does a better job of explaining the overall variance.
+
+  total degrees freedom (df_t) = n - 1
+  group degrees freedom (df_g) = k - 1 (k = number of groups)
+  error degrees freedom (df_e) = df_t - df_g
+
+  mean squares (average variance between groups and within groups)
+  mean square group (MSG) = SSG / df_g
+  mean square error (MSE) = SSE / df_e
+
+  F-score = var between groups / var within groups = MSG / MSE
+
+Interpretting the p-value: the probability of at least as large a ratio between the
+"between" and "within" group variability if in fact the means of all groups are equal.
+
+p-value = area under the f-curve beyond the f-statistic (score). the f-score can never
+be negative (no two tailed tests since extreme values lead to more positive f-values).
+
+Using R:
+p_value = pf(f-score, df_g, df_e, lower.tail=F) # f-dist
+
+Results:
+if p_value < significance level: reject null hypothesis. the data provide enough
+  evidence that at least one pair of means are different from each other,
+otherwise:
+  the data do not provide enogh evidence that one pair of means is different from 
+  each other. the observed differences are attributed to sampling variability
+
+
+
+Summary:
+Z-score: two means, large sample size
+T-score: two means, small sample size
+two means: 
+  - one is 0, other is real
+  - both are real means (measure the difference)
+    - difference is 0, or difference is not 0
+
+ANOVA (F-score): multiple means
+Paired-Data

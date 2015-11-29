@@ -1,0 +1,42 @@
+==== disjoint events + general addition rule
+
+disjoint events can't occur at the same time, but you can ask for the probability
+of a -union- of disjoint events:
+
+what is the probability of drawing an ACE and a JACK ?
+P(J and A)
+
+union of non-disjoint events are when you have a joint probability
+where both events have some overlap
+
+what is the probability of drawing a RED card or a JACK? (joint events)
+P(J or R) = P(J) + P(R) - P(J or R)
+
+what is the probability of drawing a JACK or a 4? (disjoint events)
+P(J or 4) = P(J) + P(3)
+
+
+P(A or B) = P(A) + P(B) - P(A and B) --> non-disjoint
+P(A or B) = P(A) + P(B)  --> disjoin events, P(A and B) = 0
+
+
+
+sample space: the collection of all possible outcomes of a trial
+  sample space of two coins: {HH, TT, HT, TH}
+probabillity distribution: the rate each event in the sample space is expected
+    to occur
+  probability distribution of two coins {.25, .25, .25, .25}
+
+The events must be disjoint, each have a probability 0 <= x <= 1, and sum to 1
+
+
+complementary events: two disjoint (mutex) events, or set of events, whose 
+  prob add up to 1
+
+the sum of probabilities of two disjoint events does not necesarily have to be 1
+the sum of probabilities of two complimentary events must be 1
+
+complimenary events are also disjoint events.
+disjoint events aren't necessarily complimentary events
+  
+  

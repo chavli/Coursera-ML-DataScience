@@ -1,0 +1,70 @@
+===== Multiple Regression
+building regression models with multiple predictors
+
+R:
+if the lin model uses a categorical variable as a predictor, the reference level
+will be the only level not mentioned in the summary output of the model.
+
+=== Interpretting the Output
+The slope: you consider each slope individually and read them as:
+
+  Numerical:
+  "All else held constant, for each 1 unit increase of X the model predicts that Y will
+  increase on average by slope units"
+
+  Categorical:
+  "All else held constant, the model predicts that for X category, Y will be slope units
+  higher/lower than the reference level on average"
+
+The intercept is the value when all other explanatory values are set to 0. This may
+or may not make sense within the context.
+
+
+In the case where a nuerical variable is combined with a multi-level categorical 
+variable, each categorical variable will have to use the same slope value from 
+the numerical variable. The assumption that the slope variable applies to all 
+categories may not hold for all cases.
+
+
+===== Adjusted R^2
+pair-wise scatterplots
+
+R example:
+states = read.csv(url("http://d396qusza40orc.cloudfront.net/statistics/lec_resources/states.csv"))
+
+# simple linear regression
+pov_slr = lm(poverty ~ female_house, data=states)
+summary(pov_slr)
+anova(pov_slr )
+
+# R^2 = explained variability / total variability  (multiple R^2)
+
+# multiple linear regression
+pov_mlr = lm(poverty ~ female_house + white, data=states)
+summary(pov_mlr)
+anova(pov_mlr)  # total variability is constant, just partitioned more
+
+-----
+R^2 will clearly keep going up if we add more variables to the model, what we really
+want to know is if the extra variables are helping. This is the point of 
+ADJUSTED R^2.
+-----
+
+adjusted R^2 = 1 - ((SSE[residuals] / SST[total variability]) * (n - 1)/(n-k-1) )
+  n: number of observations
+  k: number of predictors (never negative) => adjusted R^2 < R^2
+
+  adjusted R^2 applies a penalty for larger numbers of predictors
+
+  adjusted R^2 is the baseline for model comparison
+
+
+===== Collinearity and Parsimony
+Predictors are considered collinear if they're correlated with each other. Predictors of
+a model should be chosen such that they are independent and thus not collinear.
+
+Parsimony, avoid adding predictors that are associated with each other as adding them
+doesn't bring anything to the table.
+
+we prefer the most -parsimonious table-, the model with the highest predictive power
+with the fewest variables.

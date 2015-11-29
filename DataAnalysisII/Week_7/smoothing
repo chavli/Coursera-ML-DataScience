@@ -1,0 +1,55 @@
+===== Smoothing (time-series data)
+
+- capture non-linear relationships
+- harder to interpret 
+- example: running averages, local regression
+
+the filter function can be used for running averages (or any function)
+as.vector(filter( dataset$variable, filter=rep(1, 200)) / 200)
+
+an improvement to this idea is that data closer to the center should
+be weighted more. this strategy is useful for time-series data or any
+other chain of dependent observations.
+
+NOTE: the sum of all weights must be 1
+
+ws = 10 # window size +/-
+tukey = function(x) pmax(1-x^2, 0)^2
+filt = tukey(seq(-ws, ws) / (ws + 1))
+filt = filt /sum(filt) # ensure they sum to 1
+plot(seq((-ws), (ws)), filt, pch=19)
+
+as.vector(filter( dataset$variable, filter=filt)
+
+
+
+Lowess (loess): locally weighted scatterplot smoothing
+lw = loess(Y ~ X, data=dataset, span=)
+
+span is a value [0,1] that determines the percent of the data used
+to smooth a curve around a datapoint. as span increases, the model
+gets smoother but the bias also increases
+
+lw$fitted is the curve
+
+You can also predict with loess
+p = predict(lw, newdata=dataset, se=T)
+
+Plotting standard error:
+p$fit +/- 1.96*p$se.fit
+
+
+
+Splines
+library(splines)
+
+# df is the degrees of freedom, this determines the number of functions
+# applied to each datapoint when predicting an outcome:
+# y_n = b0 + sum_i=1^df[b_i*f(x_n)] + e_n
+# the df is usually the polynomial order required to fit the data
+
+ns1 = ns(data, df=3) 
+
+ns1 is a spline matrix, each column is a function
+
+lin_fit = lm(Y ~ ns_1)

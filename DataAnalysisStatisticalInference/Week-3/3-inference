@@ -1,0 +1,61 @@
+===== inference
+null hypothesis, two events are independent and nothing is going on between them
+alternative hypothesis, two events are dependent and there is some relationship
+  between the two events. --> difference is not due to chance
+
+the goal is to decide whether or not to reject the null hypothesis
+
+
+===== hypothesis testing
+H_0: no difference, variable of interest is set to be equal to something
+H_A: there is a difference. variable of interest if less than, greater than
+or not equal to a value.
+
+a simple way to do hypothesis testing is to first know the CI of the 
+variable of interest. if the value using in H_0 falls within the CI, 
+we cannot reject H_0. Although this is quick, this doesn't tell us the 
+probability of certain outcomes under H_0 (p_values tell us this).
+These probabilities can be used to make decisions about the hypothesis. 
+
+Hyp Tests and CI's are always about the population parameter and never
+applied to the sample statisic. (mu vs mu_bar)
+
+p_value: P(observed / extreme outcome | H_0 true)
+
+P(x_bar > 3.2 | H_0: mu = 3)
+x_bar ~ normal dist
+
+
+if the p_value is extremely small (<= .05 (5%)), we reject the null hypothesis
+
+===== interpreting the p-value:
+the p-value gives us the likelihood of an event given that the null
+hypothesis is true. if we were to perform another sample (same size, same manner)
+there would be a probability (p_value) that the value stated in the
+alternative hypothesis is seen.
+
+this is why we want a very low p-value before rejecting the null-hypothesis
+
+
+===== two-sided tests
+  instead of looking for a difference in one diretion, we look at differences
+  in both direections: H_0: x = 2, H_A: x != 2
+
+P(x_bar > 3.2 OR x_bar < 2.8 | H_0: mu = 3)
+  = P(x_bar > 3.2) + P(x_bar < 2.8)
+
+two-sided tests, assuming all other things constant, will produce p-values
+twice as large as single-sided tests.
+
+
+
+===== quick review
+z-score, Z, = (x_bar - mu) / SE
+
+SE = std dev / sqrt(n)
+
+CI = mu +/- n*SE
+
+interpret results within the given context
+
+

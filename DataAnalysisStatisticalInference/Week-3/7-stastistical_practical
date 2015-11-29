@@ -1,0 +1,10 @@
+===== statistical vs practical signficance
+statistical significance is based on z-score
+practical significance is based on "effect size"
+
+effect size is the difference between the null hypothesis value and the
+alternative value. using a large enough n, a researcher can claim 
+that a small difference between two values is statistically siginificant...
+even if the effect size (diff between H_0 and H_A) is really small.
+
+always ask about the effect size when dealing with significance tests

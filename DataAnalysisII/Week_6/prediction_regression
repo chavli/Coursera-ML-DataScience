@@ -1,0 +1,45 @@
+===== Predicting with Regression
+
+Linear Discriminant Functions (Classification)
+Logistic Regression (Classification)
+
+lin_fit = lm(Y ~ X)
+
+two ways to evaluate for a prediction
+  coef(lin_fit)[1] + coef(lin_fit)[2]*x
+  OR
+  new_data = data.frame(X = x)
+  predict(lin_fit, new_data)
+
+  the columns of new_data must be in the same order as the variables used in
+  the linear fit.
+
+Prediction Intervals
+
+pred_y = predict(lin_fit, new_data, interval="prediction") #95% PI, assuming normal
+ord = order(new_data$X)
+matlines(new_data$X[ord], pred_y[ord,],type="l", col=c(1, 2, 2))
+
+
+
+For logistic regression a cutoff must be defined to determine 1 or 0 since the 
+model returns probabilities. In most cases the cutoff is done by iterating through
+different values. 
+
+In some cases you want predictions to be on the "response" or "probability" scale
+instead of log-scale or something else. This can be achieved by doing the following:
+predict(model, type="response")
+
+
+Comparing Models with CV
+
+library(boot)
+cost_f = function(win, pred = 0) mean(abs(win-pred) > .5)
+glm1 <- glm(Y ~ X, family="binomial", data=D) # logistic
+glm2 <- glm(Y ~ X, family="gaussian", data=D) # linear
+
+# perform cross-validation
+cv1 <- cv.glm(dataset, glm1, cost, K=10)
+cv2 <- cv.glm(dataset, glm2, cost, K=10)
+
+the cv1$delta variable is a list of error rates for each fold.

@@ -1,0 +1,32 @@
+===== bayesian inference
+prior probabilities: your belief before collecting any data. the naive prior 
+  is a uniform distribution.
+
+posterior probability: the probability of our desired result P(hypothesis | data)
+
+the prior can be updated as more data is collected and it also becomes less
+important as more data is collected.
+
+
+P(A | B) = P(B | A) P(A) 
+                P(B)
+
+P(A | B) = [P(A) * P(B)] / P(B)
+
+
+
+===== Examples
+P(cancer) = .017
+P(+ | cancer) = .78
+P(+ | no cancer) = .1
+
+
+P(cancer | +) = P(+ | cancer) * P(cancer) / P(+)
+              =  P(+ | cancer) * P(cancer) / (P(+|cancer) *P(cancer) + P(+ | no cancer) * P(no cancer))
+              = (.78 * .017) / (.78*.017 + .1 * .983)
+              = 0.1188598
+              = the probability they have cancer has increased to 12%
+
+After another round of testing:
+              = (.78 * .12) / (.78 * .12 + .1 * .88)
+              = 52%

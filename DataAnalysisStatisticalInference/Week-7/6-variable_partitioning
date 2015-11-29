@@ -1,0 +1,16 @@
+===== Variability Partitioning
+Another method for determining the significance of a model is to use R^2 value.
+Instead of using a t-test to perform the analysis, we look at how much of the variance
+in y is explained by x (or x's).
+
+This method is similar to ANOVA
+
+we just run our linear model through anova and examine the values of the output.
+In this case we use the F-statistic to perform the hypothesis test.
+
+Calculating R^2:
+  1. cor(x, y)^2
+  2. explained variability / total variability (values come from anova table)
+
+If the p-values in the anova table are extremely small ( large F-statistics ) 
+we say the predictor is significant.

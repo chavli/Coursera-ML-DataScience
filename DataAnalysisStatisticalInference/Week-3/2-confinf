@@ -1,0 +1,61 @@
+===== confidence interval (for means)
+95% CI = x_bar +/- 2*SE #SE = standard error, margin of error
+
+in general"
+x_bar +/- z * (s / sqrn(n)), s = sample std dev
+
+
+the conditions to use the above method are the same as the conditions for the CLT:
+1. independence
+    randomly selected/assigned
+    n < 10% of total population size
+2. sample size / skew
+
+z is the critical value that determines the cut off points for the confinf
+to calculate the critical value:
+1. determine the strength of the CI: 90, 95, or 99%
+2. since the dist is symmetrical you want to find the cutoff points on each
+side that capture the middle CI.
+3. percent = (1 - CI) / 2
+4. look up the z-score using the percent value
+
+R: 
+qnorm(percent_val)
+qnorm(.025) = +/- 1.96 # 95% CI
+
+# 90% , z = 1.64
+# 98% , z = 2.33
+
+===== accuracy vs precision
+accuracy is how often our CI captures the true population value
+precision is the width of the interval
+
+we typically begin by choosing the accuracy (CI) that we want and the
+rest of the calculations flow from that.
+
+increased accuracy = decreased precision
+
+increasing sample size, increases precision and accuracy.
+
+confidence interval does not describe the individual elements that make 
+up the sample statistics (which the CI describes)
+
+
+===== samples sizes, margin of errors, accuracy
+you can begin with choosing a margin of error, and CI and then calculate the 
+sample size you need to accomplish that ME
+
+ME = z * (S / sqrt(n)) S = sample deviation
+
+decreasing the ME requires a polynomial increase in sample size
+
+to cut the ME in half requires 4 times as many samples
+to cut the ME by 1/3 requres 9 times as many samples
+
+
+
+===== example
+a 95% confidence interval means that 95% of random samples will have a
+parameter value that falls within the described range
+
+

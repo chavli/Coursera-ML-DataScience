@@ -1,0 +1,43 @@
+
+dataset types:
+
+census: used for descriptive analysis. typically contains the entire population, no
+  generalization required.
+
+observational study: used for inferential analysis
+
+convenience sample: all types, but may be biased. bias can come in many forms and my 
+  not seem at first to effect the outcomes or even be related to the problem.
+
+randomized trial: establish causal relationships. randomize sample groups, one is
+  typically a control group, to establish a causal relationship between variables.
+
+retrospective: inferential tasks, looking backwards
+
+predictive studies
+
+across time:
+  cross-sectional - inferential
+  longitudinal - inferential, predictive
+
+
+
+
+1. The IP address and the user ID are qualitative variables and the number of bytes returned is quantitative. 
+
+2. Both the spread and the center increase. 
+
+3.  82.40639
+
+4. 0.8084719, -1.1122863, 0.3716671
+
+5. This is an example of an inferential data analysis
+
+
+7. 1. Each variable forms a column, 2. Each observation forms a row, 3. Each table/file stores data about one kind of observation. 
+
+8. All of the above
+
+9 We are referring to the random variable X when we know the random variable Y has value y. The distribution of this variable may be different than the distribution of the variable X when Y is also random.
+
+10 If we took a census of all people in Baltimore, we would expect to see that the younger a person was, the more likely they were to have taken a Coursera course. 

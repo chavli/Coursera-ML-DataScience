@@ -1,0 +1,22 @@
+Count Predictions
+
+Examples:
+  - calls to a call center
+  - number of flu cases
+  - number of cars that cross a bridge
+  - percent of children passing a test (rates)
+  - percent of hits to a website from a country (rates)
+
+Linear Regression with a transform is one option.
+
+The poisson distribution is best for counts and rates
+rpois(100, lambda=100) where lambda defines the rate "100 X per Unit"
+
+One important characteristic is that the mean and variance are the same.
+
+Poisson Regression / Log-Linear
+
+log(E[Y|params]) = b0 + b1X 
+E[Y|params] = exp(b0 + b1X) = exp(b0) * exp(b1X)
+
+pois_fit = glm(Y ~ X, family = "poisson")

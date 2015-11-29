@@ -1,0 +1,82 @@
+Introduction
+  Loans are one method for individuals and groups to get a sudden influx of cash to use
+  for whatever reason. Typically when considering a loan, the point that most people will
+  dwell on the most is the interest rate. The interest rate defines how much more a
+  person must pay back on top of their loan amount. Naturally, any person or organization
+  would want the lowest interest rate possible. Many variables effect the interest rate with
+  the most common variable being credit score, or FICO score . The purpose of this
+  assignment is to examine some possible reasons for why interests rates still vary between
+  people with similar FICO scores. Our initial assumption is that interest rates assigned
+  to people and groups are not fixed for a given FICO score, or FICO score range. 
+
+Methods 
+  Data Collection / Dataset
+   For this analysis I used a dataset provided by the Lending Club , a peer-to-peer lending 
+   service, to help us in our investigation. The dataset contains 2500 loan instances (samples) and contains information about credit scores, home ownership, and employment history.
+
+   The download time of the dataset is unknown as it was provided to us by the instructor.
+
+   All work done on the data was performed using the R environment.
+
+
+Analysis
+  Exploratory Analysis
+  The first step of the investigation was scrubbing the data to remove samples that were incomplete
+  and/or appeared to be outliers. Only a handful of samples were missing data, however, many 
+  samples listed "n/a" for employment length. This is a valid response but is useless for analysis
+  so it was removed as well. Additionally, there were a few rows that listed a 
+  negative value for received money. This is clearly nonsense, so these rows were also removed.
+  In the end, the scrubbed dataset contained 2419 samples.
+
+  Another important change was to increase the FICO ranges that were used to split the dataset. 
+  In my case, I created a new partitionining defined by FICO ranges spanning 20 points instead of
+  4. The main reason for doing this was to create subsets with larger sample sizes for statistical
+  analysis.
+
+Statistical Modelling 
+  Since the objective is to discover what factors influence different interest rates to manifest 
+  amongst groups with similar credit scores, the approach I took was too look for strong 
+  correlations, negative and positive, beween each continuous variable, X, with interest rates 
+  given a FICO range. Essentially, a conditional correlation:
+  
+            l = cor(X, Interest Rate) | FICO Range
+
+  As for categorical variables, my goal was to extract the most discriminative variables. In other
+  words, to find the categorical variables that divide the interest rates, given a FICO range,
+  into clusters with means (or any measure) that are statistically significant. Since interests
+  rates are percentages, I made the assumption that they are normally distributed. This simplifies
+  the process of calculating confidence intervals.
+
+Results
+  4 FICO score ranges were chosen to perform the analysis on as they encompassed 1969 of the 2419 
+  samples, about 80% of the given data. The ranges were 664-684, 684-704, 704-724, and 724,744 with
+  sample sizes of 586, 568, 456, and 359 respectively. The samples contained all the provided
+  original information (14 variables) and none contained missing data or suspicious looking data.
+
+  A correlation matrix was built to analyze the relationships between interest rates and the 8
+  continuous variables: "Amount Requested", "Loan Time", "Debt-to-Income Ratio", "Monthly Income", 
+  "Open Credit Lines", "Revolving Credit Balance", "Number of Inquiries", and "Percentage 
+  Satisfied". The last variable is simply the invested amount divided by the request amount for 
+  the loan
+
+  The resulting correlation matrices for each of the FICO ranges showed only two of the variables
+  contained a strong, abs( cor(X, Y) ) >= .5, correlation with interest rate across all groups. 
+  The two variables were "Amount Requested" and "Loan Time" their correlation values are listed 
+  below:
+
+  Correlation with Interest Rates
+    FICO Range: [664,684) Set Size: 586
+    Amount Requested              Loan Time     
+          0.59325377               0.60393403   
+     
+    FICO Range: [684,704) Set Size: 568
+    Amount Requested              Loan Time     
+          0.58870110               0.66597790   
+             
+    FICO Range: [704,724) Set Size: 456
+    Amount Requested              Loan Time     
+          0.63908649               0.67046261   
+             
+    FICO Range: [724,744) Set Size: 359
+    Amount Requested              Loan Time     
+          0.54109035               0.63933543   

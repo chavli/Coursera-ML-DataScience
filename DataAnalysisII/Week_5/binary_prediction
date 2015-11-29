@@ -1,0 +1,58 @@
+Binary Outcomes
+
+Examples are: Alive/Dead, Win/Loss, Success/Failure, On/Off, etc
+
+quantitative regression is not suitable for these situations.
+
+Options:
+  Binary Outcomes {0,1}
+  Probability (0, 1)
+  Odds (0, Inf)
+  Log Odds (-Inf, Inf)
+
+
+--> Logistic Regression
+f(x) = e^x / 1 - e^x, where x is the linear relationship
+Y = log(f(x)) = b0 + b1X
+
+b0 log odds of the event if X = 0
+b1 log odds of success prob for each additional unit of X\
+
+odds are the ratio between the chance of success over the chance of failure:
+  Ex 1: Success 33% Fail 66% Odds: 1/2
+
+Logistic Regression in R: glm(Y ~ X, family='binomial')
+
+glm = generalized linear regression, family parameter specifies what to do. 
+family = binomial means create a logistic model
+
+log_fit = glm(Y ~ X, family='binomial')
+summary(log_fit)
+
+the coefficients are log ratios so you have to do
+
+exp(log_fit$coeff)
+
+a parameter value > 1 means more likely to be success (1), and < 1 is less likely
+to succeed (0)
+
+if looking at log odds, > 0 is success < 0 is failure
+
+confidence intervals:
+exp(confint(log_fit$coeff))
+
+ANOVA:
+anova(log_fit, test="Chisq")
+
+============================================
+
+Simpson's Paradox
+Behavior of an average is not the same as the behavior of each subgroup 
+considered for the average.
+--> Always look at the covariates when building a model.
+
+
+============================================
+Odds Ratio or 1 = no difference in odds
+Log Odds Ratio = no difference in odds
+Odds Ration < .5 or > 2 = "moderate effect"

@@ -1,0 +1,55 @@
+--- Steps in Data Analysis PT 1
+
+1. define the question
+    "Can I use quantitative characteristics of emails to classify them as 
+    spam/ham"
+
+2. define the ideal dataset
+    decscriptive -  a whole population
+    exploratory - a random sample with many variables measured
+    inferential - the right population, randomly sampled
+    predictive - a training and test set drawn from the same population
+    causal - data froma randomized study
+    mechanistic - data about all components in a system
+
+3. determine what data can actually be collected / acquired
+
+4. obtain the data
+    UCI machine learning datasets
+
+5. clean the data
+    record all steps in the cleaning process
+
+6. exploratory data Analysis
+    summarize data
+    clean data
+    exploratory plots / exploratory statistics (clustering / dendographs / )
+
+
+7. prediction / modelling 
+    reduce prediction error
+    confusion matrix
+    measure uncertainty, and variability of uncertainty
+
+
+8. intepret results (wording)
+    "describes"
+    "correlated/associated with"
+    "predicts"
+    "leads to / causes"
+
+9. challenge results 
+    initial question
+    data source
+    pre-processing
+    analysis
+    conclusions
+
+10. write up
+    lead with question
+    describe the process
+    interpret the results
+    challenge the results
+
+11. reproducible
+

@@ -1,0 +1,45 @@
+===== Chi Square "goodness of fit" (GOF) Test
+Evaulate the distribution of a categorical variable with more than 2 levels to a 
+theoretical "ideal"/"expected" distribution.
+
+"How well does the observed distribution fit the expected distribution?""
+
+H_0: there is no difference
+H_1: something is going on
+
+Conditions for chi-squared test:
+  Independence:
+    random sampling / assignment
+    if sampling without replacement, sample size < 10% of total population
+    all groups are mutually exclusive of each other --> no samples belong to more 
+    than 1 group.
+  Sample size:
+    each group must have at least 5 expected cases
+
+
+---  Count-Data stastistic
+When comparing counts, we use the chi-square (X^2) statistic.
+
+X^2 = sum_i^k (O_i - E_i)^2 / E_i
+
+k = number of groups (levels) 
+O_i: observed count for group i
+E_i: expected count for group i
+
+The chi-squared distribution has one parameter: degrees of freedom (df)
+df = # of groups - 1 = k - 1
+
+the df influences the shape, spread, and center of the distribution.
+
+The chi-squred distribution is always positive and is right skewed.
+
+the p_value used in this test is dependent on the chi-squared value and df and is defined
+as the area above the test statistics.
+
+note: this is similar to the f-distribution.
+
+Using R:
+p_value = pchisq(chi_square, df, lower.tail=F)
+pchisq(22.63, 4, lower.tail=F)
+
+

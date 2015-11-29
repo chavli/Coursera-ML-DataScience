@@ -1,0 +1,8 @@
+===== Lab Notes
+plot_ss(x = mlb11$at_bats, y = mlb11$runs, leastSquares = TRUE)
+
+
+
+-- seeing the qq plot of residuals
+qqnorm(m1$residuals)
+qqline(m1$residuals)

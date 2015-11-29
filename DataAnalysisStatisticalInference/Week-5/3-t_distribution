@@ -1,0 +1,69 @@
+===== T-Distribution
+dealing with small sample sizes (<30) and CI's for means.
+
+t-distribution
+- centered at 0
+- single parameter: degrees of freedom (df)
+- has thicker tails which means data is more likely to be within 2 SD from the mean
+
+as df increases the t-dist approaches the normal distribution. In general the distribution
+is more conservative than the normal distribution and becomes more conservative as
+df decreases.
+
+degrees of freedom is based on data size. the less data you have the harder it becomes
+to reject the null hypothesis
+
+the t-distribution is good in scenarios when:
+  - the sample size is small
+  - there is no good estimate for the variance or the variane is unknown
+  - the population distribution must be normal 
+
+
+instead of z-statistics we look at a t-statistics (variance unknown, small sample size)
+  T = (obs - null) / SE
+
+
+===== Inference with T-Distribution
+same idea: point estimate +/- margin of error. 
+
+the difference are in the details: due to small sample sizes we use the t-dist
+
+x_bar +/- t_df * SE_x
+
+SE_x = s / sqrt(n) s = sample standard deviation
+
+degrees of freedom (df) = n - 1
+
+to figure out the critical t value t_df, you need to know df and corresponding tail
+areas for your confidence level. tail area is total tail area (so sum of both tails 
+in a two sided test).
+
+using R (find critical values): 
+>> qt(0.025, df = 21) # takes the area under the lower tail (ex two-sided 95% CI)
+>> 2.08
+
+using R (find p-value) (two sided)
+>> pt(t-score, df) # returns the p-value under the lower (left) tail
+>> 2 * pt(t-score, df, lower.tail = False)
+
+
+===== Inference for Comparing Two Small Sample Means
+In this situation we again consider the difference between the two means.
+Confindence Interval:
+  (x_1 - x_2) +/- t_df * SE_(x1_x2)
+
+Hypthesis Test:
+T_df  = (obs - null) / SE
+      = ((x_1 - x_2) - (mu_1 - mu_2)) / SE_(x1 - x2)
+
+SE_(x1 - x2) = sqrt( s_1^2 / n1 + s_2^2 / n2  )
+
+the df used for multiple sample groups is:
+df = min(n1 - 1, n2 -1) # conservative heruristic
+
+t_df = critical value
+T_df = T-score
+
+
+Confidence Intervals and Hyp Tests must agree with each other:
+H_0 not in CI <=> we reject H_0

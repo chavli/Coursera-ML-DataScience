@@ -1,0 +1,70 @@
+=== Summary Statistics
+  Evaluation Relationships:
+    Direction, Shape, Strength, Outliers
+
+  Scatterplots, histograms, boxplots, dotplot, xintensity map
+
+Skewness - distributions are skewed towards the longer tail
+Modaility - the number of peaks (modes)
+
+=== Measure of Center
+  mean - arithmatic average
+  median - 50th percentile
+  mode - most frequent value (not very useful for continuous variables)
+
+  mean < median in left-skewed distributions
+  mean > median in right-skewed distributions
+
+=== Measure of Spread
+  range - (max - min)
+
+  IQR - difference between 25th and 75th percentile
+
+  variance - average squared deviation from the mean
+    squaring values removes the effects of negative numbers on positve numbers
+    larger deviations have more influence on the variance
+
+  standard deviation - square of the variance
+
+  diversity vs variability: diversity measures how evenly distributed the values
+  between some range are.
+
+  10, 10, 10 50, 50 has more variability than 10, 20, 30, 40, 50
+
+
+=== Robust Statistics
+  statistics that are not effected significantly by extreme observations
+
+  robust, non-robust
+  median  mean
+  IQR     StDev, range
+
+  robust statistics should be used for skewed distributions
+
+=== data transformations
+  -skewed data is often transformed to be more symmetric
+  -data that is positive and right-skewed can be log-transformed to be more 
+  symmetrical
+
+  other transforms:
+  square root
+  inverse
+
+
+=== categorical variables
+  the bars of a barplot can be presented in any order, unlike a histogram where
+  the bars follow a natural ordering.
+
+  contingency variable: model the distribution between multiple categorical variables
+  segmentend bar graph
+
+  relative frequency segmented bar plot
+
+  mosaic plot, can show 3 variables at once in a 2d graph
+  e.g.
+  width of each bar represents sample size
+  height of each bar within its category shows its relative frequence
+  colors within a category represent another category condtioned on the first category
+
+  categorical vs numerical 
+  side-by-side box plot

@@ -1,0 +1,72 @@
+NOTE: columns can be removed by using negative numbers:
+new_data = data[ , -2]
+
+R can handle:
+  tab-delimited text files
+  CSV
+  excel files
+  json files
+  html/xml
+  databases
+
+data sources: other people, from the web, API's, web scraping
+
+methods to get data:
+  download.file(url, output_file, method='curl' ), need to use CURL if url is https
+  ex. download.file(url, destfile='/home/cha/...', method = 'curl')
+  you can record the date with: d = Date()
+
+  NOTE: R reads data entirely into RAM
+
+R can also handle Excel files but the xlsx package needs to be installed.
+
+install.packages('xlsx')
+read.xlsx(...)
+  filename, sheetIndex, rowIndex, colIndex, header
+read.xlsx2(...)
+
+read.csv(file.choose())
+
+
+--------------------------------------------------------------------------------------
+
+[ ] file connections allow you to read data piece-wise instead of all at once:
+  files, urls, gzfile, bzfile
+
+file:
+  conn <- file( /path/to/file, "r" )
+  data <- read.csv(conn)
+
+url:
+  conn <- url( /url/to/resource, "r" )
+  lines <-readLines(conn, n = 10)  # read 10 lines from the url
+
+JSON:
+  install.package('RJSONIO')
+  url = "..."
+  download.file(url, filename, ,method="curl")
+  conn = file(filename)
+  json_data = fromJSON(conn)
+
+remember to always close connections:
+  conn.close()
+
+
+[ ] writing data out to a table
+  write.table(data, filename, quoted, sep, row.names, col.names)
+  ex: write.table(data, /path/to/file, quotes=T, sep=',', row.names=T, col.names=T)
+
+[ ] saving workspaces (all variables and data in a R session)
+  save(), save.image() -- data stored in working directory
+
+  load(filename) recovers a saved session
+
+[ ] concatentating strings
+  paste(..., sep), 
+  paste0(...) is the same except sep is defaulted to ""
+
+
+useful data handling packages:
+  bigmemory - data that's too large to fit into RAM
+  RHadoop - interface with hadoop
+  

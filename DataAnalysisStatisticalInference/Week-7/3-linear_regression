@@ -1,0 +1,75 @@
+===== Linear Regression
+There are 3 conditions that must be met by the data before a linear regression can
+be performed on it:
+  1. linear relationship
+    this conditions can be checked using a scatter plot or residiual plot of the data
+
+  2. nearly normal residuals
+    the residuals in a residual plot should appear to have no pattern, and nearly
+    normally distributed centered around 0.
+    this can be seen by plotting the histogram of all residuals or by looking at the
+    normal Q-Q plot.
+
+    NOTE: non-linearly related data will break this condition
+
+  3. constant variability
+    the variability of the residuals around 0 should be roughly constant. another way
+    of thinking about it is the data points should be scattered evenly around the
+    best fit line. this pattern is called "homoscedasticity" and can be seen in the 
+    residuals plot.
+
+    NOTE: fan-shaped data (increasingly scattered) will break this condition
+
+
+===== R^2 Evaluation
+This metric tells us how well the linear model fits the data it's modelling. 
+
+R^2 is simply the square of the correlation coefficient and can tell us how much
+of the variability seen in the response variable is explained by the model. is it 
+always a value between 0 and 1. 
+
+Interpreting the R^2 value:
+  R^2 of the variablity in the response variable is explained by the model.
+
+  Naturally, we want as much of the variability in the response variable to be
+  attributed to the explanatory variables used in the model. The difference between
+  the R^2 value and 1 is what isn't explained.
+
+
+===== Regression with Categorical Explanatory Variables
+Dealing with regression with a numerical response variable and categorical explanatory 
+variables.
+
+The first thing that must be done is establishing which level of the categorical 
+variable is the "reference level". Represent the reference level with a 0 in the
+regression. 
+
+This means that the intercept represents the expected value of the 
+response variable given the reference categorical value.
+
+Other levels of the categorical variable are taken with respect to the referenec variable.
+The expected value of Category 1 is N% higher than the expected value of Category 0.
+
+The Slope: this has a different interpretation when dealing with categorical variables
+  y = bo + b1*level1 + b2*level2 + b3*level3 + ... + bN*levelN
+
+  all the parameters will have values, but when performing a prediction for a given
+  level, you only consider that level's slope all other slopes are forced to 0
+
+  predicting for level 3:
+    y = bo + b1*level1 + b2*level2 + b3*level3 + b4*level4 + b5*level5
+
+    level1 = 0, level2 = 0, level3 = 1, level4 = 0, level5 = 0
+
+  this input paramters in this case are binary instead of continuous like in the
+  previous examples.
+
+
+
+
+
+Review:
+  error (residual) = observed - predicted
+  slope = (SD_y / SD_x) * cor(x, y)
+
+

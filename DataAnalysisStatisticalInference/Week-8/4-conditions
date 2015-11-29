@@ -1,0 +1,17 @@
+===== Diagnostics for Multiple Regression
+
+Conditions:
+  linear relationship between numerical X's and Y
+    can be checked by looking for a random scatter in the residual plot (e vs x)
+      plot(model$residuals, X)
+
+  nearly normal residuals
+    checked using a histogram and qqplots
+    hist(model$residuals), qqnorm(model$residuals), qqline(model$residuals)
+
+  constant variability of residuals centered around 0
+    plot(model$residuals, model$fitted), plot(abs(model$residuals), model$fitted)
+
+  indepedence of residuals
+    => independence of observations
+    if data is a time-series, check residiuals vs ordered data

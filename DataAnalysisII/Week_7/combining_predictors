@@ -1,0 +1,25 @@
+===== Combining Predictors
+
+Classification based on averaging / voting. Improves accuracy, reduces 
+interpretability.
+
+Suppose we have 5 completely independent classifies with 70% accuracy each
+ and we perform a majority vote in the end to determine classification.
+
+Majority Vote: 5, 4, or, 3 are correct:
+group_acc = 5c2 * (.7)^3 * (.3)^2 + 5c1 * (.7)^4 * (.3)^1 + (.7)^5
+          = 83.7%
+
+With 101 models group_acc = 99.9%
+
+
+Methods: bagging, boosting, other combination methods
+
+{devtools}:install_github
+
+rmse() root mean squared error
+
+predict(model1, data)/N + predict(model2, data)/N + ... + predict(modelN, data)/N
+
+{e1071} SVM package
+medley package on github

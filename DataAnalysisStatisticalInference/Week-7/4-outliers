@@ -1,0 +1,21 @@
+===== Dealing with Outliers
+Identifying and handling outliers when performing linear regression.
+We want to determine what effect the outlier has on the regression line and this can 
+be done by calculating the regression with and without the outliers.
+
+Before any of this can be done, we must first identify the outliers:
+  outliers are points that fall beyond the general cluster of data points and can be 
+  classified into two types:
+    
+    leverage points: points that fall horizontally away
+    from the cloud but don't influence the regression line
+
+    influential points: points that alter the regression line. calculate the regression
+      with and without these points to see the difference in slope.
+
+    graphing the data points is an effective way to classify outliers
+
+
+In many cases, the outliers are the most interesting points and removing them would
+take away crucial information. An alternative strategy is to "regroup" the orignal
+data and perform a regression on each group.

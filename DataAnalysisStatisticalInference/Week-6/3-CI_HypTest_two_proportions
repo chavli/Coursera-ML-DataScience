@@ -1,0 +1,44 @@
+===== Confidence Intervals for Two Proportions
+the strategy is the same as when comparing two means: when comparing two propotions we 
+focus on the difference of the two values rather than the values themselves:
+
+CI: p_hat1 - p_hat2 +/- Z * SE_(p_hat1 - p_hat2)
+
+SE = sqrt( (p_hat1 * (1 - p_hat1)) / n1 + (p_hat2 * (1 - p_hat2)) / n2 )
+
+note: the addition is due to the increased variance due to additional variables:
+  var(a + b) = var(a) + bar(b), take the sqrt to get standard error
+
+Independence: within group, and between groups
+Success-Failure Condition: both groups must pass
+
+===== Hypothesis Test for Two Proportions
+When comparing two proportions in a hyp test, we bump into the following situation:
+
+H_0: p1 = p2, or p1  - p2 = 0
+
+In this scenario, we have no hard number for either proportion. This makes it difficult
+to do calculations. The best we can do is make an educated guess about what the value
+could be.
+
+Pooled Proportion (weighted average): total successes / total n
+
+p_hat_pool = (successes_1 + successes_2) / (n1 + n2)
+
+The pooled proportion is used to calculate the success-failure condition and standard error.
+note: wherever there is a p1 or p2 replace it with p_pooled
+
+success-failure condition
+  n1 * p_pool >= 10
+  n1 * (1 - p_pool) >= 10
+    
+  n2 * p_pool >= 10
+  n2 * (1 - p_pool) >= 10
+
+standard error
+
+  SE = sqrt(  p_pool * (1 - p_pool) / n1 + p_pool * (1 - p_pool) / n2 )
+
+Z-score = (observed_diff - 0 / SE)
+
+p_value = pnorm(z_score)

@@ -1,0 +1,28 @@
+Item 1 - Write-up
+
+  Does the analysis have an introduction, methods, analysis, and conclusions?
+  Does the analysis report the number of samples?
+  Does the analysis report any missing data or other unusual features?
+  Does the analysis include a discussion of potential confounders?
+  
+  
+  Are figures labeled and referred to by number in the text?
+  Is the analysis written in clear and understandable English?
+  Are the names of variables reported in plain language, rather than in coded names?
+  
+
+  Are the statistical models appropriately applied?
+  Are estimates reported with appropriate units and measures of uncertainty?
+  Are estimators/predictions appropriately interpreted?
+  Does the analysis make concrete conclusions?
+  Does the analysis specify potential problems with the conclusions?
+
+
+Item 2 - Figure and caption
+  Is the figure caption descriptive enough to stand alone?
+  Does the figure focus on a key issue in the processing/modeling of the data?
+  Are axes labeled and are the labels large enough to read?
+
+
+Item 3 - References
+  Does the analysis include references for the statistical methods used?

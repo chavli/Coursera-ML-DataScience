@@ -1,0 +1,30 @@
+organizing an analysis
+
+data, figures, R code, text files
+
+1. Data 
+    contains all raw data and processed data
+      - include source of data and date pulled
+      - it should be clear from file names where the processed data is from and the script used to create it
+
+2. figures
+    exploratory and final figures
+      - final figures must be designed to be understandable and readable
+
+3. Code
+    raw scripts, final scripts (for reproducibility), markdown files (R)
+      - comments describing what, when, how, why
+        * justify constants, data set sources, processing details , etc
+
+    R Markdown files: File -> New -> R Markdown
+
+4. Additional Text files
+  README, summary of analysis
+    -describe tranformation from raw to processed data
+  summary needs to include:
+    title
+    introduction (motivation)
+    methods (statistics / models)
+    results (analysis, measures of uncertainty)
+    conclusion( future work, potential problems)
+    references

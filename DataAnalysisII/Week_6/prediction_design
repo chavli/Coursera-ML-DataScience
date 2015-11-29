@@ -1,0 +1,55 @@
+===== Prediction Study Design
+
+motivation
+
+choosing the right data
+
+- training, testing, validation sets
+
+feature selection
+
+know the benchmarks
+- other models, state of the art
+
+- build models with the raw data so you dont waste time post-processing for a small
+  marginal gain.
+
+- always try a "always 0" or "always 1" for classification, your model should 
+ do beter
+
+error measures (binary classification)
+  1 = sick, 0 = healthy
+
+  - true positive = correctly identified (true: 1, predict: 1)
+      sick people classified as sick
+
+  - false positive = incorrectly identified (T0, P1)
+      healthy people classified as sick
+
+  - true negative = correctly rejected (T0, P0)
+      healthy people classified as healthy
+
+  - false negative = incorrecty rejected (T1, P0)
+      sick people classified as healthy 
+
+
+  positive predictive value = TP / TP + FP
+  negative predictive value = TN / TN + FN
+
+  sensitivity: the average number of sick people classified as sick
+  specificity: the average number of healthy people classified as healthy
+
+  the above metrics let us know how good the classfier is AND if it's biased towards
+  a certain classification.
+
+  ALWAYS BUILD CONFUSION MATRICES
+
+  specificity: the number of positives classified as negatives
+  sensitivity: the number of negatives classified as positives
+
+
+error measures (continuous prediction)
+L1, L2, accuracy
+
+
+

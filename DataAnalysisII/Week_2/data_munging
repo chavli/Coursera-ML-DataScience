@@ -1,0 +1,40 @@
+NOTE: defining functions: func <- function(x){...}
+
+data munging
+  fixing variable names
+  create new variables
+  merging datasets
+  reshaping datasets
+  pt 2 -----
+  deal with missing data
+  transfomrn variables
+  check for and remove missing values
+
+
+-- fixing character vector variables
+tolower(), toupper()
+strsplit(x, char)
+
+# ex: selecting the first word in period delimited column names
+split_names = strsplit(names(data), "\\.")
+first_elem <- function(x){x[1]}
+fixed_names = sapply(split_names, first_elem)
+
+# replacing the first underscore characters with nothing
+sub( "_", "", names(data))
+
+# replacing all underscores
+gsub( "_", "", names(data))
+
+# discretizing continuous variables with cut:
+cut(data, breaks) -- breaks define the number-of and ranges of buckets
+cut2(data, g) -- g = number of breaks
+
+# merging datasets (a SQL join)
+merge(x_data, y_data, by.x, by.y , all=T) -- all defines whether or not columns are kept 
+that dont have matches (NA filled)
+
+# sorting and ordering data
+sort() -- returns the data in sorted order
+order() -- returns the ordering of each value. can be used to sort data frames
+  order(A, B) -- sort by column A, and within each A sort by B

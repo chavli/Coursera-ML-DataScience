@@ -1,0 +1,69 @@
+===== Hypothesis Testing For Paired Data
+Dealing with two data points taken for different treatments on the same subject.
+Example: the scores for two sections of a test from the same student
+
+This is called "paired data", to make all the samples independent you calcuate the 
+difference and perform analysis on the new value.
+
+In the framework of a hypothesis test, the null hypothesis is that there is no difference
+H_0: average diff = 0
+H_1: average diff != 0
+
+Alternative hypothesis states that there is a difference. From this point, the test
+is carried out as usual.
+
+The average difference in paired values will be near-normal
+
+Z = (x_diff - u_diff) / SE_diff
+
+use z-score to find p-value (one sided), since hyp test is two sided, multiply the value
+by two
+
+
+===== Confidence Intevals for Paired Data
+same idea: point_estimate +/- SE
+
+When doing paired tests, the interpretation of the results should be stated more carefully
+since you're dealing with a difference.
+
+For example, the 95% CI for the difference in two parts of an exam is between (-1.78, .68).
+This isn't useful as it doesn't tell you which section is expected to have a higher
+score.
+
+So taking the CI (-1.78, .68), and a diff calculated as part_1 - part_2 we phrase the
+results as:
+
+we are 95% confident that students will score 1.78 points lower to .69 points
+higher on part 1 when compared to part 2
+
+
+===== Comparing Independent Means From Two Groups
+This takes a similar strategy to paired-data in where the hyp test is carried out on
+the difference of values rather than the values themselves.
+
+
+An example of this is comparing the means of various subgroups within a sample.
+(work hours per week | education level) ~ (numeric | categorical)
+
+A side-by-side box-plot is good for comparing numeric and categorical data together.
+
+sample means: x_1. x_2, diff_x = x_1 - x_2
+
+CI = diff_x +/- z*SE
+
+SE = sqrt( s1 / n1 + s2 / n2  ) s = sample variance, n = sample sizes
+
+Conditions for comparing means:
+Independence:
+  - within groups: random sample, < 10% of population
+  - between groups: non-paired
+  - sample size of each group must be >= 30
+
+H_0: diff = 0
+H_1:  diff != 0
+
+z-score determines the point at which you begin calculating the area. the total 
+area is called the p-value. for a two sided test, you multiply the area by 2.
+
+always mention sample sizes in results so data are reproducible
+

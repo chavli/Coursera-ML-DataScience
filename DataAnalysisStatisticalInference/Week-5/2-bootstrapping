@@ -1,0 +1,35 @@
+===== Bootstrapping
+Perform estimates on statistics other than means
+
+ex: no CLT for medians
+
+given the original sample, we assume that the overall population will have many data
+points similar to what's in the sample. we call this assumed population the 
+"bootstrap population". This implies the sample is representative.
+
+bootstrap sample - a sample of size N taken from the original sample of size N with 
+  replacement
+
+bootstrap statistics - the value computed on the bootstrap sample
+
+repeat until you have enough samples to build a bootstrap distribution
+
+
+===== Bootstrap Confidence Intervals
+
+1) Percentile method: take the middle 95% of the bootstrap distribution to estimate the
+  95% CI
+
+2) Standard Error Method: calculate the mean and standard error of the bootstrap
+  distribution. Then you find the 95% CI by calculating  mean +/- 1.96 * SE
+
+The bootstrap strategy has few assumptions but if the resulting bootstrap distribution
+is skewed or sparse the resulting intervals may be unreliable. Also, the starting
+sample population must be representative (random sampling)
+
+
+sample distribution: created using a sample drawn from the true population with replacement
+
+bootstrap distribution: created using a sample drawn from the original sample with replacement
+
+the former is often difficult to do

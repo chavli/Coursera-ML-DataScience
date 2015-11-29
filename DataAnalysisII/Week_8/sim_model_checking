@@ -1,0 +1,31 @@
+===== Simulation for Model Checking
+
+Simulation is good fore:
+  bootstrapping a statistics
+  evaluating models
+  testing different hypothesis
+  sensitivity analysis
+
+
+Y_i = b_0 + b_1*X_i + e_i, if X_i and e_i are normal then we simulate data
+by doing
+
+b_0 = 1
+b_1 = 2
+X_i = rnorm(500)
+e_i = rnorm(500)
+Y_i = b_0 + b_1*X_i + e_i
+
+Violating the normality assumption on either X or e will cause problems when
+fitting a model.
+
+Additionally, performing multiple simulations (above code in a loop) we can
+calculuate the variance / quantiles of the parameters.
+
+
+--- Simulating from a density estimate
+d = density(data$X)
+new_X = rnorm(N, mean=data$X, sd=d$bw) # multiple normal dists, bw=bandwidth
+new_d = density(new_X, bw=d$bw)
+
+(assuming a KDE with a gaussian kernel)

@@ -1,0 +1,45 @@
+^xxxx : matches xxxx at the START of lines
+
+xxxx$ : matches xxxx at the END of lines
+
+[Bb]  : character classes, match with anything that is in the class
+
+Example:
+  ^[Ii] am  : matches "I am" and "i am" at the start of lines
+  ^[0-9][a-zA-z] : matches any number followed by any letter at the start of lines
+
+[^xxxx] : negation. match lines WITHOUT the characters in the class
+
+Example:
+  [^?.]$  : match sentences that DONT end with a "?" or "."
+
+xxxx|yyyy|zzzz : define word alternatives
+
+Example:
+  ^[Gg]ood|[Bb]ad : matches the word "good" at the start or the word "bad" anywhere
+  ^([Gg]ood | [Bb]ad)
+
+
+* : repeat the preceding characters match any number of times (including 0)
++ : repeat the preceding characters  match at least once
+{min, max} : match the preceding characters at least min times and at most max times
+{min} : match exactly min times
+{min, } : match at least min times
+
+Example:
+  [Bb]ush( +[^ ]+ +){1, 5} debate - match lines with 1 to 5 words between the words "Bush"
+  and "debate"
+
+Example (repeated words):
+    +([a-zA-Z]+) +\1 +
+    the () matches one or more characters surrounded by a space. the \1 means to use
+    the stuff in the () again to match the same word. this finds sequential
+    repeated words
+
+
+* is greedy, it matches any characters as possible. a "*" followed by a "?" causes
+it to become lazy
+
+Example:
+  ^s(.*)s : finds the longest string that starts and end with "s"
+  ^s(.*?)s : finds the first string that stars and ends with "s"

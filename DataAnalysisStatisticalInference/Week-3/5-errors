@@ -1,0 +1,35 @@
+===== decision errors
+type 1 error, type 2 errors, and balancing them
+
+type 1 error: rejecting H_0 when H_0 is true
+type 2 error: failing to reject H_0 when H_A is true
+
+determining which error to minimize is highly dependent on the context.
+
+in the context of a court case, it is much worse to convict an innocent person
+than it is to left a guilty person walk.
+
+===== type I error rate:
+reject H_0 when p-value is less than alpha (usually a small alpha)
+this makes it difficult to reject H_0
+
+P(type I error | H_0 true) = alpha
+
+increasing our alpha (.01, .05, .1) also increases our chance of making a 
+type I error.
+
+choosing an alpha is based on how costly making a type I error is. if 
+a type I error is extremely costly, then a lower alpha is better
+
+type 1 error rate: alpha
+type 2 error rate: beta (usually dont control this)
+power of a test is 1 - beta
+
+goal: keep alpha and beta low
+
+
+===== type 2 error
+if the true popuation statistic is very close to the null value it is harder
+to detect a difference (stating there is no difference when there actually is).
+As a result of this, beta, also depends on "effect size" (delta) the
+difference between the point estimate and null value.

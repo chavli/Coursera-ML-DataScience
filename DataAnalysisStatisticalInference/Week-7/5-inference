@@ -1,0 +1,44 @@
+===== Inference with Regression
+Hypothesis testing for the siginificance of the predictor, CI's for the slope, and 
+conditions for inference.
+
+The question we want to answer is:
+  Is the explanatory variable a significant predictor of the response variable?
+  (This is a test for the slope.)
+
+  H0: B0 = 0, no slope, no relationship between explanatory and response variables
+  H1: B1 != 0, there is some relationship, slope is significant
+
+
+We use the t-distribution to determine the significance of the slope
+  
+  t_statistic (T) = (point_estimate - null value) / SE
+
+  T = (b1 - 0) / SE_b1, df = n - # paramters
+
+  we lose one degree of freedom for each paramter estimate, in the single explanatory
+  case df is: n - 2 
+
+  IMPORTANT: n is the number of data points
+
+  all this information is provided in the R output of linear regression
+
+  p_value = P(t >= abs(T)) 
+
+
+We can also calculate confidence intervals for the slope:
+  b1 +/- t_df*SE_b1
+
+t_df is the t_score of the desired confidence interval
+R:
+  qt(significance level / 2, df) # two tailed
+
+
+NOTE: inference on the intercept is rarely performed
+
+
+
+=== Conditions for Interence
+  must be a sample, no point in doing this if we have the entire population
+  samples must be independent
+  samples must be randomly sampled

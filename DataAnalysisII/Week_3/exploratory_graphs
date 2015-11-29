@@ -1,0 +1,55 @@
+Exploratory Graphs Pt 1:
+- understand data properties
+- find patterns
+- suggest statistical strategies
+- many should be made
+
+when displaying data, it is better to use position rather than length for comparisons.
+both are better than using area or angle.
+
+boxplot(A ~ B, col = c("blue", "orange"), names=c("yes", "no"), varwidth=T)
+shows a box plot of A given each value of B
+varwidth adjusts the width of each boxplot based on the number of datapoints for
+each variable.
+
+other graphs:
+barplots(), hist(A, breaks=N)
+
+density graph
+density(A) -- shape is similar to a histogram but the curve sums to 1
+plot(dens, lwd=3, col="blue")
+lines(dens2, lwd=3,col="orange") -- overlay lines
+
+=====
+
+Exploratory Graphs Pt 2:
+scatterplots:
+plot(x, y, type, xlab, ylab, xlim, ylim, cex, col, bg)
+  plot(X, Y, pch=19, col="blue")
+ 
+ NOTE: col can be set to an explicit color or pass it a factor
+
+
+-- make the size of the points dependent on the data
+plot(X, Y, pch=19, col="blue", cex=X$a)
+
+
+smoothScatter (X, Y),a 2D density plot
+hexbin() {hexbin}, 
+
+-- quantiles of x compared to the quantiles of y
+-- if the distribution of values is the same, the points will
+-- fall on a 45 deg line. compare observations with a normally distributed
+-- variabled to see if the variable is normal
+qqplot(x, y) 
+
+-- handling geographic data
+library(maps)
+map("world") # "us", "europe", etc
+
+lines(), points(), can be used to add more elements to a graph
+
+
+library(Hmisc)
+  cut2(), discretizes a continuous variable
+

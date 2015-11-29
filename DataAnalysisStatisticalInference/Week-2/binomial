@@ -1,0 +1,52 @@
+===== binomial distribution
+
+bernoulli random variable: a random variable with only two possible outcomes
+
+the binomial distribtions models the probability of k-successes among n bernoulli
+variables with probability of success p
+
+number of scenarios * probability of a single scenario
+(n choose k) * (p^k * (1 - p)^(n - k))
+
+R: chose(n, k)
+
+P(k successes in n trials with p rate of success) = (n choose k) * (p^k * (1 - p)^(n - k))
+
+to be binomial:
+- the trials have to be independent
+- the number of trials must be fixed
+- each trial has two outcomes: success or failure
+- the probability of success, p, must be the same for all trials
+
+
+the expected value of a binomial distribution is: E[mu] = n*p
+the standard deviation is: sigma = sqrt(n*p*(1-p))
+
+R, dbinom(k, n, possible)
+
+
+===== normal approximation of the binomial
+  as n -> inf, binomial -> normal
+
+  this property lets us easily calculate statements like P(k >= m) when 
+  dealing with binomial distributions using a normal distribution.
+
+  using a strictly binomial approach P(k >= m) = sum(i)_m^n P(i successes)
+    R: sum(dbinom(m:n, n, p))
+
+  using a normal approximation, calculating P(k >= m) is much easier
+    R: dnorm(m, mu, sd)
+
+  the normal approximation requires large n and at the very least satisfy:
+    n * p >= 10
+    n * (1 - p) >= 10
+
+  also the .5 adjustment of binomial values when using the normal approx
+
+
+===== working with the binomial
+binomial probabilities do not scale:
+  it is much harder to get 600 successes of 1000 than it is to get 6 succeses
+  out of 10 with a constant p.
+
+  this is due to the larger difference in expected value and desired value.

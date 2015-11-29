@@ -1,0 +1,60 @@
+===== Multiple Testing
+
+When you perform multiple tests on the same set of data then there is a chance
+one of the experiments will give you what you want. The problem with this 
+is if you perform 20 tests on some data and 1 test is successful, people
+may claim they have 95% confidence in their result.
+
+V = number of false positives (Type I)
+m_0 = number of not significant variables
+
+False positive rate (FPR): The rate at which false positives are called
+  significant. E[V / m_0]
+
+Family Wise Error Rate (FWER): The probability of at least one false
+  positive P( V >= 1)
+
+False Discovery Rate (FDR): The rate at which claims of significance are
+  false E[V / R]
+
+
+
+--- Controlling the FPR
+Suppose that you perform 10000 tests and B = 0 for all of them. Suppose
+that you call P < 0.05 significant. The expected number of false positives
+is 10000 * 0.05 = 500 (!!!)
+
+If we get 500 significant results, there's a good chance all are false positives.
+
+
+
+-- Controlling the FWER
+The Bonferroni Correction:
+Suppose we do m tests
+We want to control FWER at level a: P( V >= 1) < a
+Calculate P-vals normally, and define a_fwer as a / m
+P-vals < a_fwer are significant.
+
+Pros: easy to implement, Cons: conservative.. can be very conservative
+
+--- Controlling the FDR
+Benjamini & Hochberg Correction
+Suppose we do m tests
+We want to control FDR at level a, E[ V / R ] < a
+Calculate P-vals normally
+Order the p-vals from smallest to largest.
+Call any P_i < a * i / m significant. 
+
+Pros: easy to calculate. Cons: allows for some false positives. Can't be used
+  on dependent datasets.
+
+--- Adjusted P values:
+instead of modifying alpha, we can adjust the p-vals. in the bonferroni example,
+instead of dividing a by m, we can multiple each p-val by m. ( max(m * p, 1) )
+
+sum(p.adjust(p_vals, method="bonferroni") < .05)
+sum(p.adjust(p_vals, method="BH") < .05)
+
+
+If there is a strong dependence between tests use method = "BY"
+(Benjamini & Yekutieli)

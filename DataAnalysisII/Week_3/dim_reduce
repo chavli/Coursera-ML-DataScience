@@ -1,0 +1,33 @@
+Dimensionality Reduction
+
+
+SVD - singular value decomposition
+  X = UD(V^T)
+  u : left singular vectors
+  v : right singular matrix
+  d : singular values, a decreasing list of values stating the amount of variance
+    each vector captures. ex: if d[0] = .9, then u[0] * v[0] will reconstruct 90%
+    of the original data
+
+svd_data = svd(scale(data)) -- scale centers the matrix (0 mean)
+
+PCA - principle component analysis
+  prcomp(data, scale=T)
+
+
+both of these commands can't ne executed on data with NAs
+
+filling in NAs
+library(impute)
+fixed_data = impute.knn(na_data)$data
+
+KNN algorithm used to fill in NA with complete observations near the incomplete
+observation
+
+
+-- both of these algorithms can be used to compress images (an image matrix) for
+easier storage
+
+-- always center your data!!
+
+-- use fast.svd for data frames with rows >> cols, or cols >> rows

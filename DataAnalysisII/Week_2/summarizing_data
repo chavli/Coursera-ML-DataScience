@@ -1,0 +1,30 @@
+summarizing data
+
+things to look for:
+  - missing values
+  - outliers / strange data
+  - wrong units
+  - mislabeled columns 
+  - etc
+
+useful functions:
+  dim()
+  names()
+  quantile()
+  summary()
+  class()
+  unique() -- used with qualitative and discrete variables 
+  table() -- used with qualitative and discrete variables
+    table(A, B) -- shows the relationship between A and B as a table. (rows drawn from A)
+
+
+any(<boolean expression>) -- check for NA, or outliers
+all(<boolean expression>)
+
+complex boolean expressions:
+  & -- AND
+  | -- OR
+
+ex: data[ A > 10 & B < 20, cols]
+
+rowSums, rowMeans, and their column counterparts

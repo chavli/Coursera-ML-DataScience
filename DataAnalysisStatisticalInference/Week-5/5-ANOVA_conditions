@@ -1,0 +1,15 @@
+===== Conditions for ANOVA
+Independence:
+  - within groups: samples within groups must be independent
+  - between groups: samples between groups must be independent
+
+Approx Normal: distributions within each group should be nearly normal
+  normal probability plots (sample quantiles vs theoretical quantiles)
+
+Equal Variance: variance within each group should be nearly equal (homoscedastic)
+  more important if sample sizes between groups varies greatly
+
+Independence:
+  -random sample / assignment
+  - each group less than 10% of respective population
+  - no-pairing between groups (use repeated measures ANOVA)

@@ -1,0 +1,23 @@
+===== Cross Validation
+
+Accuracy on the training set is optimistic (due to overfitting)
+
+Create prediction function using training data.
+
+Evaluate prediction function using an independent test set
+
+This will reduce the bias of the model
+
+Sampling Techniques:
+  Random Sampling with or without replacement
+  Equal division (k-fold) - more bias but accuracy is more stable
+  Leave One Out - much less bias, but more variability in accuracy
+
+Both sets are independent but must be sampled from the same population. The
+sampling method must also be uniform across sets.
+
+When dealing with time-series data, a sample must sample a time-chunk that 
+mimics real patterns.
+
+library(cvTools)
+library(boot)

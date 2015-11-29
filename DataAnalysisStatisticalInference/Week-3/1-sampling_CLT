@@ -1,0 +1,51 @@
+===== sampling and the CLT
+
+
+the mean of means of subpops drawn from the total population will be about the
+same as the mean of the total population
+
+the variance (or std) of the means of the subpops will be less than the variance
+of the total population. additionally, as the subpop sizes increase, the
+variance of the means of the subpops will decrease.
+
+====== Central Limit Theorem:
+  the distribution of a sample statistics is nearly normal, centered at the
+  population mean and with a std dev equal to the population std dev divided by
+  sample size
+
+if population std dev is not avaiable, use sample std dev
+
+x_bar ~ N(mu, sigma / sqrt(n))
+
+
+1. sampled observations must be independent
+  - random sample / assignment
+  - if sampling without replacement, n < 10% population
+
+2. sample size and skew: if population dist is normal, any sample size
+  will give you a normal dist
+
+  if the population dist is skewed, larger sample sizes are needed 
+  (n > 30, but more is better)
+
+====== CLT conditions
+  10% rule, sample size is never more than 10% of the total population.
+  this condition attempts to prevent drawing samples where members of the
+  sample have a dependencies between them.
+
+  skewness: if the initial population is heavily skewed, a larger sample
+  size will be needed to make the sample statistic follow a normal 
+  distribution.
+
+
+population
+sample size - size of a single instance
+sample count  - number of instances
+
+
+
+the variability of sample means is measured using standard error not
+standard deviation.
+
+general idea, know where the variability/randomness is coming from and
+use the standard error/deviation of the randomness

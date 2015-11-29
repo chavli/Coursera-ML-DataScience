@@ -1,0 +1,30 @@
+Clustering
+
+distance/similarity measures
+  - continuous: L1, L2, correlation
+  - binary: manhattan distance (L1)
+  - discrete: levenshtein distance
+
+grouping methods
+  - hierarchical clustering (dendograms)
+
+visualizing groups
+
+intrepreting groups
+
+
+
+
+>>> dendogram code
+x = rnorm(10)
+y = rnorm(10, mean = 10)
+dataFrame = data.frame(x=x, y = y)
+distxy = dist(dataFrame)
+hclustering = hclust(distxy)
+plot(hclustering)
+
+
+>>> K-mean clustering
+kmeans(dataframe, centers=, iter.max, nstart)
+
+

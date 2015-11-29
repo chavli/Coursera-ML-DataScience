@@ -1,0 +1,49 @@
+Model Checking and Selection
+
+Attributes to consider:
+  - Overfitting
+  - Underfitting
+  - Variance and Bias
+
+Regression Assumption
+Linear : variance is constant, no outliers, have all the right terms, and 
+  summarizing with a linear trend
+
+Robost Linear Regression: rlm() {MASS}, reduces the influence of datapoints that 
+may be outliers
+
+QQ plot - compares the quantiles of the standardized residuals with the quantiles of
+a norm(0, 1) distributions. if the points are 45deg than the normal assumption is ok,
+otherwise the normal assumption is incorrect.
+
+
+Variable Selection
+ - Domain specific knowledge
+ - Exploratory Analysis
+
+Statistical Selection
+  Using the data to determing the selection, using the data again to evaluate
+  the model. INCREASES BIAS
+ - AIC: Akaike Information criterion
+ - BIC: bayesian information criterion
+ - Lasso and Ridge Regression
+
+Most techniques consider the log-likelihood of the model and the complexity of the
+model. Complexity is penalized.
+
+Data should be split into two groups, one for variable selection and another for
+model evaluation.
+
+lin_fit = (Y ~ X)
+step(lin_fit) 
+
+the step function adds / deletes variables (forward vs backwards) greedily until the
+AIC score stops improving.
+
+BIC is used in a similar way using the regsubsets{leaps} function
+another BIC function is bic.glm{BMA}
+
+BIC returns the posterior prob that each variable should be used in the final model.
+
+
+NONE OF THIS GIVES YOU A CAUSAL MODEL.

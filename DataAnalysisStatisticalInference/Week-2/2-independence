@@ -1,0 +1,33 @@
+==== independence
+
+two events are independent if knowing the outcome of one provides no information
+about the outcome of the other.
+
+independent: coin flips, drawing cards with replacement
+dependent: drawing cards, without replacement, from a deck
+
+P(A | B) = P(A) //knowing something about B does not help us with A
+
+
+According to a 2013 Pew Research Poll that surveyed 1,504 Americans, 
+67% of respondents said that they believe the Earth is warming. 
+Roughly 50% of Republicans, 88% of Democrats, and 62% of Independents 
+share this opinion. Based on these data, opinion on global warming and 
+political leaning are most likely
+
+P(warming) = 67%
+P(warming | republican) = 50%
+P(warming | democrat) = 88%
+P(warming | independent) = 62%
+
+In this case, we see that knowing an individuals party affiliation gives
+us some information about their stance of global warming. As a result, 
+we say that party affiliation and global warming stance are dependent.
+
+When we see differences, the next step is to perform hypothesis to determine
+if the differences are real or caused by chance.
+
+Determine dependence -> Perform hypothesis testing
+
+if events are indepedent, their joint probability is:
+P(A and B) = P(A) * P(B)

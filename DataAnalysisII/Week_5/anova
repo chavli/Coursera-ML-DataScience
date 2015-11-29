@@ -1,0 +1,37 @@
+-- ANOVA with multiple factors
+
+outcome variable is quantitative and symmetrically distributed with multiple covariates
+and you want to identify the contribution of each covariate.
+
+Ex. AB Testing
+
+ANOVA testing is done using aov(Y ~ X1 + X2 + X3...)
+--> multiple variables with multiple levels
+
+
+aov_results = aov(Y ~ X + ...)
+summary(aov_results)
+
+NOTE: order of variabes matter!!! the F values displayed by summary are for all
+variables are conditioned on the variables that were listed before it
+
+aov(movies$score ~ movies$genre + movies$ratings)
+not the same as
+aov(movies$score ~ movies$ratings + movies$genre )
+
+Working with quantitative values:
+  factor values need a regression variable for each factor
+  qualitative values only need a single variable
+
+Y = b + b1 * I(X1 = x1) + b2 * I(X1 = x2) + ... + g1(X2)
+X1 = categorical, X2 = continuous
+
+continuous variables have 1 degree of freedom, categorical variables of one DOF
+per category
+
+terminology
+unit - one observation
+treatment - conditions applied to units
+factors - conditions controlled by experimenter, usually technical and not of any
+          interest
+replicates -  multiple independent units with the same factors/treatments     

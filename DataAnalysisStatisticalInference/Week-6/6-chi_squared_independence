@@ -1,0 +1,61 @@
+===== Chi Squared Independence Test
+Two categorical variables, at least one has more than 2 levels. 
+
+Here we want to know if two categorical values are independent or not.
+
+In this case we are comparing the observed distributions of two categorical variables with
+each other. In the previoous section we compared the observed distribution of a single
+categorical variable with its expected distribution.
+
+Consider a matrix with the values of each category along the x and y axis:
+
+X^2 = sum_i^k (O_i - E_i)^2 / E_i
+
+k = number of cells
+O_i: observed count for group i
+E_i: expected count for group i
+
+df = (R - 1) * (C - 1) # R = row count, C = column count
+
+
+Conditions for chi-squared independence:
+  Independence:
+    random sampling / assignment
+    if sampling without replacement, each case size < 10% of total population
+    all cases are mutually exclusive of each other --> no samples belong to more 
+    than 1 group.
+  Sample size:
+    each case must have at least 5 expected cases
+
+Example: obesity and relationship status
+obesity: obese, not obese (explanatory)
+relatiionship: dating, married, cohabiting (response)
+
+If the two variables are independent we should observe the following pattern:
+
+  P(obese) = P(obese | dating) = P(obese | married) = P(obese | cohabit)
+
+The expected counts for each group are:
+
+  P(obese) * # dating, P(obese) * # married, P(obese) * # cohabit
+
+now we can measure how much the observed values deviate from the expected values
+
+the expected count of a cell is defined as: 
+
+  expected_count = row_total * column total / table_total
+
+
+Once we have all the expected values calculated we can calculate the chi-squared statistic
+and df. From here, we can determine the p_value and the results of the independence test.
+  
+  
+  calculate expected values
+
+  calculate chi-squared statistic and df
+
+  H_0: variables are independent
+  H_1: there is some relationship between the variables
+
+  p_value = pchisq(chi_squared, df, lower.tail=F)
+

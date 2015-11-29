@@ -1,0 +1,44 @@
+==== Residuals
+residuals are the differences (leftovers) between the data points and the fitted model.
+residual = true response value - fitted response value = data - fit = y - y_hat
+
+
+
+===== Least Squares Lines
+Minimizing the residuals to build a best fit line is not ideal since residuals can
+be positive and negative. Two alternative  and better options are:
+
+minimize absolute values of residuals (L1)
+  sum abs(y - y_hat)   
+  all residuals weighted equally
+
+minimize the squared residuals (L2)
+  sum (y - y_hat)^2
+  values with higher errors are weightedm more
+
+least squares line: y = b0 + b1*x
+  b1 = slope = (s_y / s_x) * R_xy
+    s_y = stand dev of Y
+    s_x = stand dev of X
+    R_xy = corr(x, y)
+
+    b1 tells us how much the response unit changes, on average, per unit change in 
+    the explanatory variable
+
+  b0 = y-intercept
+    the best fit line always goes through the average of x and y: x_bar, y_bar
+    the intercept can be calculated easily:
+      b0 = y_bar - b1*x_bar
+
+    b0 is the expected value of the response variable if the value of the explanatory
+    variable is 0. sometimes this value only makes mathematical sense.
+
+
+===== Prediction and Extrapolation
+  prediction: lets us take unseen x-values that fall into the range of the original
+  x-values and pumps out a prediction for y. 
+
+  extrapolation is when you try to make a prediction for an x-value that falls 
+  outside the range of the original data. many times, the intercept is an extrapolation.
+  extrapolation also assumes that the trend seen in the original range of data
+  is true for data outside the original range.

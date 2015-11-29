@@ -1,0 +1,40 @@
+===== ANOVA multiple comparisons
+determine which means are different from each other
+
+multiple tests lead to inflated error rates.o
+one test at 5% sig level has a 5% chance of making a type 1 error (reject null when true)
+two tests at 5% sig level incur a larger than 5% chance of making a type 1 error
+
+to adjust for this inflation we consider the Bonferroni Correction
+
+bonferroni sig level = sig level / number of comparisons
+  = sig level / (k * (k - 1) / 2), k = number of groups
+
+example:
+sig level 5% (.05)
+number of levels (groups) within variable: k = 4
+
+bonferroni sig level = .05 / (4 * 3 / 2) = .05 / 6 = .0083 
+
+the adjusted sig level is much more stringent
+
+standard error for multiple groups:
+
+SE = sqrt( MSE/ n1 + MSE/ n2)  # given anova output
+df = df_e (all groups use same error rate)
+
+Hypothesis Test Setup:
+H_0: mu_1 - mu_2 = 0
+H_1: mu_1 - mu_2 != 0
+
+T-score = ((x_1 - x_2) - 0) / SE
+
+p-value is calculated from the T-score and df. in this case we use df = df_e 
+if df is large, the t-dist will be normal-like. If the T-score is > 4, then the 
+difference is significance
+
+Using R (two-tailed):
+p-value = 2 * pt(t-score, df, lower.tail=F)
+
+compare p-value to bonferroni sig level
+

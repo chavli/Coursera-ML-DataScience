@@ -1,0 +1,20 @@
+analysis types:
+
+1. descriptive - describe a set of data. not meant to suggest, predict, or infer anything
+
+2. exploratory - discover new correlations and planning future studies. nothing here should
+  be generalized or be called final.
+
+3. inferential - use a small sample of data to say something about a larger population
+  estimate the quantity you care about and the amount of uncertainty
+
+4. predictive - use the data about some entity to predict values for another entity
+  prediction != causation
+
+5. causal - usually a randomized study. uncover what happens to one variable when another
+  variable is forced to change. considered to be causal in the average case
+
+6. mechanistic - understand the exact changes in variables that change the value of another
+  variable in a predictable way. typically occurs in applied sciences and engineering.
+
+  

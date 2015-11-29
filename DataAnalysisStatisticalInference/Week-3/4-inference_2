@@ -1,0 +1,9 @@
+===== inference for other estimators
+hypothesis tests and CI's can be applied to any estimator that is nearly
+normal.
+
+difference between sample means: x_bar1 - x_bar2
+sample proportion: p_hat
+
+
+z = (point estimate - null value) / SE

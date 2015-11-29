@@ -1,0 +1,71 @@
+=== Data Basics
+  Categorial: Ordinal, Categorial
+  Numerican: Continuous, Discrete
+
+=== Types of Studies
+  Obserational vs Experiement
+
+  Observational - based on random sampling, can make generalizable and correlation statements (retrospective: past data, prospective: data collected during experiment)
+  Experiment - based on random assignment, can make causal statements
+
+  Confounding Variables: factors that influence the variables of interest in an experiment (may not be known to researchers)
+
+
+=== Census vs Samples
+  A census is a sample containing the whole population. Additionally, the population can change while a census occurs so the result will only be an approximation
+  of the true population. Sampling is cheaper and in most cases enough for analysis (if representative).
+
+
+=== Sources of Bias
+  0 bias = use the entire population
+  bias may be introduced when selecting sample groups
+
+  Convenience Sample: individuals who are easily accesable are more likely yo be included in the sample
+    population is not random or representative
+
+  Voluntary Response: occurs when only those who volunteer response (have strong opinions)
+    population is not random
+
+  Non-response: a small non-random non-representative of the sample population respond
+    population is random, responses are not random / representative. 
+
+  Difference between non-response and voluntary is that the former includes an initial random sample but a non-random sub-sample of people reply. In the latter
+  there is no initial random sample.
+
+
+  Sampling Methods
+    Simple Random Sample
+      Sample uniformly from the overall population
+
+    Stratified Sample
+      Divide the population into homogeneous groups and sample uniformly from the groups
+
+    Cluster Sample
+      Divide the population into heterogenous clusters and sample uniformly from a 
+      random subgroup of clusters (more economical)
+
+
+=== Experimental Design
+  - Control: a "neutral" group used to compare the treatment of interest to
+  - Randomize: randomly assign subjects to treatments
+  - Replicate: have a large enough sample to perform the experiment multiple times
+  - Block: control variables that are known to effect the desired results.
+    Divide experiment into blocks and then randomize groups within each block
+
+  Blocking variables are characteristics of the experimental units that we want
+  to control for (similar to stratifying).
+
+  Explanatory variables are conditions we impose on experimental units.    
+
+  blind: the experimental units don't know if they are in the control group or not
+  double-blind: the experimental units and researchers don't know who's in the control
+  group and who isn't
+
+
+=== Random Sampling and Random Assignment
+  Random sampling allows us to make generalizable conclusions
+    - method of choosing from population
+
+  Random assignment allows us to make causal conclusions
+    - method of assigning population members to experimental treatments
+    - mitigate the characteristics of the experimental units on results

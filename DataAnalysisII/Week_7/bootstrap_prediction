@@ -1,0 +1,95 @@
+===== Bootstrapping for Prediction
+
+- Cross-Validation Error Rates
+- Prediction Errors in Regression Models
+- Improving Predictions
+
+
+library(boot)
+data(nuclear)
+nuke.im = lm(log(cost) ~ date, data=nuclear)
+
+newdata = data.frame(date=seq(67, 72, length=100))
+nuclear = cbind(nuclear, resid=rstudent(nuke.lm), fit=fitted(nuke.lm))
+nuke.fun = function(data, inds, newdata){
+  lm.b = lm(fit + resid[inds] ~ date, data=data)
+  pred.b = predict(lm.b, newdata)
+  return(pred.b)
+}
+
+nuke.boot = boot(nuclear, nuke.fun, R=1000, newdata= newdata)
+
+pred = predict(nuke.lm, newdata)
+pred_sds = apply(nuke.boot$t, 2, sd)
+
+Prediction Intervals: pred +/- 1.96*pred_sds
+
+
+
+Bagging: Bootstrap aggregating (multiple models)
+  1. Resample cases and recalculate predictions
+  2. Average or Majority Vote
+
+Notes:
+  - similar bias to a single model
+  - less variance than a single model
+  - useful for non-linear functions
+
+
+Bagged Loess
+  library(ElemStatLearn)
+  data(ozone, package="ElemStatLearn")
+  ozone = ozone[order(ozone$ozone), ]
+  ll = matrix(NA, nrow=10, ncol=155 )
+  for(i in 1:10){
+    ss = sample(1:dim(ozone)[1], replace=T)
+    ozone0 = ozone[ss, ];
+    ozone0 = ozone0[order(ozone0$ozone), ]
+    loess0 = loess(temperatture ~ ozone, data=ozone0, span=.2)
+    ll[i, ] = predict(loess0, newdata=data.frame(ozone=1:155))
+  }
+
+  the columns of ll represent the predictions of each loess model. plot
+  all the columns to see the variance in prediction. take the mean of
+  the columns to find the average fit.
+
+
+Bagged Trees: {ipred}
+  1. Resample Data
+  2. Recalcuate Tree
+  3. Result is the average / mode of all the models
+
+  data(iris)
+  bagged_tree = bagging(Species ~., data=iros, coob=T)
+
+  #coob = calculate out of bag error, error is based on samples left out of
+  # the set used to build the tree.
+
+  bagged_tree[[n]]$btree will give you the Nth bagged tree
+
+
+
+Random Forests {randomForest}
+  1. Bootstrap the Sample
+  2. At each split of the tree, bootstrap the variables
+  3. grow multiple trees and vote
+
+  + Accuracy, - speed, - interpretability, - overfittng
+
+forest_model = randomForest(Species ~ Petal.Width + Petal.Length, data=iris,
+  prox = T)
+
+
+getTree(forest_model, k=N) # this gets you the Nth tree in the forest
+classCenters(iris[, c(3, 4)], iris$Species, forestIris$prox) 
+
+Building the trees in parallel:
+forest_model1 = randomForest(Species ~ Petal.Width + Petal.Length, data=iris,
+  prox = T, ntree=50)
+forest_model2 = randomForest(Species ~ Petal.Width + Petal.Length, data=iris,
+  prox = T, ntree=50)
+forest_model3 = randomForest(Species ~ Petal.Width + Petal.Length, data=iris,
+  prox = T, ntree=50)
+jungle = combine(forest_model1, forest_model2, forest_model3)  
+
+results = predict(jungle, newdata)

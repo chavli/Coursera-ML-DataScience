@@ -1,0 +1,9 @@
+Your data analysis submission will consist of the following components:
+
+The main text of your document including a numbered list of references. 
+This can be uploaded either as a pdf document or typed into the text box (not both!). 
+The limit for the text and references is 2000 words. Your main text should be written in the form
+of an essay with an introduction, methods, results, and conclusions section. 
+
+One figure for your data analysis uploaded as a .png, .jpg, or .pdf file, along with a figure caption of 
+up to 500 words. 

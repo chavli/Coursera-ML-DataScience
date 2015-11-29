@@ -1,0 +1,8 @@
+===== Correlation
+measures the strength of the linear association between two numerical values
+  cor(x, y) = cor(y, x)
+
+  highly sensitive to outliers. the correlation coefficient can be altered a lot by a 
+  single outlier.  (all points weighted equally)
+
+  need a different metric to measure a non-linear associate between variables

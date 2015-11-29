@@ -1,0 +1,63 @@
+===== Model Selection
+The process of choosing variables for building a model.
+
+Stepwise Methods:
+  backwards elimination: start with a full model and remove variables
+  forward selection: start with an empty model and add variables
+
+the criteria for removing and adding variables are:
+  p-values and adjusted R^2
+  AIC, BIC, DIC (difference information criterion), Bayes factor
+
+=== Backwards Elimination (using R^2)
+  1. start with all variables
+  2. remove one variables at a time and remember adjusted R^2
+  3. pick the model with highest R^2
+  4. repeat steps 2-4 until R^2 stops increasing by some epsilon
+
+=== Backwards Elimination using p-values
+  1. start with the full model
+  2. drop the variable with the highest p-value, refit smaller model
+  3. repeat until all variables are significant
+
+R^2 does not have to refit since the variability explained by each variable
+will not change (total variability is constant). 
+
+The tricky situation arises with categorical values with each level having a reported
+p-value. Levels of a categorical variable cant be dropped, so the only way to drop
+a categorical variable is if all it's levels are not-significant. 
+
+
+The difference in the above methods:
+p-value: significant predictors, based on somewhat arbitrary sig level
+  the advantage is that this requires fewer models to be calculated in each iteration.
+  (build once, eliminate once)
+
+adjusted R^2: more reliable predictors
+  the disadvantage is that many models have to be built per iteration in the worst case. 
+  (build one model with one variable removed, eliminate one variable)
+
+
+=== Forward Selection (adjusted R^2)
+  1. start with no variables
+  2. create models where each has a different additional variable added
+  3. choose the model with highest R^2
+  4. repeat steps 2-4 until adjusted R^2 stops increasing
+
+=== Forward Selection (p-values)
+  1. start with no variables
+  2. create models where each has a different additional variable added
+  3. choose the model with the lowest significant p-value for the new variable
+  4. repeat steps 2-4
+
+
+=== Expert Opinion
+In some cases it is best to choose variables based on the expertise of someone 
+in the related domain.
+
+
+
+=== Final Model
+If using the adjusted R^2 approach it is not guaranteed that all the variables in the 
+final variable will be statistically significant. It is guaranteed that the chosen
+variables all contribute to the predictive power of the model.

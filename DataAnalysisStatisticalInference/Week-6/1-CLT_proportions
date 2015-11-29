@@ -1,0 +1,46 @@
+===== Sampling Variability and the CLT for proportions
+sample distribution: collection of samples
+sampling distribution: collection of sample statistics based on samples
+
+proportions are usually applied to categorical variables to make them numerical.
+
+question: smoker or non-smoker (binary, categorical)
+results: 54% (numeric)
+
+--- CLT for proportions:
+p_hat: center of sample distribution
+p: center of population distribution
+
+p_hat ~ Normal(mean = p, SE = sqrt((p * (1 - p)) / n))
+
+--- CLT Conditions
+  1. Indepdence
+    random sample / assignment
+    sampling without replacement: n < 10% of total population
+  2. Sample size / skew: for binary categorical variables, at least 10 successes and 10 failures
+    n*p >= 10, n*(1-p) >= 10
+
+  If p is unknown use p_hat and hope it's accurate (sample is representative)  
+
+  Example:
+  p = .9
+  n = 200
+
+  P(p_hat > .95) = ? 
+
+  p_hat ~ Normal(.90, .0212), Z-score = (.095 - .9) / .0212 = 2.36
+  P(p_hat > .95) = P(Z > 2.36) = .0091
+
+
+In the case of binary categorical variables, the binomial distribution can also be used.
+n = 200, p = .9, 95% successes = 200 * .95 = 190
+
+Using R:
+sum(dbinom(190:200), 200, .90)
+
+
+----- breaking requirements
+if the success-failure requirement is not met:
+  + the sampling distribution will still be centered around the true population proportion
+  + the spread can still be approximated by the usual SE calculation
+  - however, the shape of the distribution will depend on whether p is close to 0 or 1

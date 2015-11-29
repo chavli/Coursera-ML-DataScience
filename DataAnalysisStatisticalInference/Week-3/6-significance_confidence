@@ -1,0 +1,30 @@
+===== significance vs confidence
+
+for two-sided hypothesis tests the significance level and confidence level
+are complements of each other.
+95% confidence level = 5% significance level (alpha = .05)
+
+alpha = .05, CI = 95%
+alpha = .1, CI = 90%
+CI = 1 - alph
+
+
+one-sided hyp test with 5% significance (alpha = .05), this leads to a 90%
+confidence interval since CI's have to be symmetric.
+
+alpha =.05, CI = 90%
+alpha = .1, CI = 80%
+CI = 1 - 2 * alpha
+
+
+hypothesis tests can use one or two tails but confidence levels must always be
+symmetric around the mean. as a result, the CI must cut-off the other tail 
+when being calculated from a one-sided hypothesis test.
+
+
+if H_0 is rejected and the CI follows the hyp tesst H_0 will not be found
+within the CI.
+
+if we fail to reject H_0 and the CI agrees with the hyp test, H_0 must be
+in the CI
+

@@ -1,0 +1,43 @@
+===== Inference for Multiple Regression
+Determining which variables are siginificant predictors by building CI's and
+performing Hyp Tests.
+
+The first step in determining which variables are the best is to build a model with
+all variables.
+
+We then perform inference on the model as a whole:
+H0: all slopes are 0
+H1: at least one slope is non-zero
+
+We use the F-statistics where DF = n - k - 1, k = 4.
+
+=== IMPORTANT
+Rejecting H0 means the model as a whole is significant, it doesn't mean the model
+fits the data. (it really means just one parameter is not 0)
+
+Failing to reject H0 means the model as a whole is not significant, it doesn't mean
+the individual variables are not good predictors of y
+
+
+If the overall model is significant, then the next step is to find out which variables
+make it significant. In R, this can be determined by looking at the p-values
+in the output of the linear model summary.
+
+Determining it by hand is done using a hypothesis test and the t-statistic.
+
+B is the slope of the variable of interest
+
+H0: B = 0
+H1: B != 0
+
+T = (point estimate - null value) / SE = (B - 0) / SE_B. All these values come 
+from the summary output of the linear model. df = n - k - 1
+
+
+
+------
+use pX functions to calculate p_values from statistic 
+use qX functions to calculate the crutucal values used in determining the CI
+
+be extremely cautious over the sidedness of the test as the effect the above two 
+calculations.s
